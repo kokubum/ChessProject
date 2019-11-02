@@ -7,6 +7,11 @@ public class BoardGame{
 	
 	public BoardGame() {
 		this.boardMatrix = new Piece[8][8];
+		
+		//Instanciação das peças brancas (16 peças):
+		//...
+		//Instanciação das peças pretas (16 peças):
+		//...
 	}
 
 }

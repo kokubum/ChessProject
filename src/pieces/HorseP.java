@@ -8,6 +8,8 @@ public class HorseP extends Piece {
 		this.isWhite = isWhite;
 	}
 
+	//Getters e Setters da classe HorseP
+	
 	public boolean isWhite() {
 		return isWhite;
 	}

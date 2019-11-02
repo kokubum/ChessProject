@@ -7,6 +7,8 @@ public class QueenP extends Piece{
 		super(Type.QUEEN, pos_x, pos_y, deslocamento_x, deslocamento_y);
 		this.isWhite = isWhite;
 	}
+	
+	//Getters e Setters da classe QueenP
 
 	public boolean isWhite() {
 		return isWhite;

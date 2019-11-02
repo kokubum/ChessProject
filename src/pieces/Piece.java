@@ -2,8 +2,8 @@ package pieces;
 
 public class Piece {
 	private Type typePiece;
-	private int pos_x, pos_y;
-	private int deslocamento_x, deslocamento_y;
+	private int pos_x, pos_y; //Posição da peça no tabuleiro (coordenadas x e y)
+	private int deslocamento_x, deslocamento_y;//Forma de deslocamento da peça
 	
 	public Piece(Type typePiece, int pos_x, int pos_y, int deslocamento_x, int deslocamento_y) {
 		
@@ -13,6 +13,8 @@ public class Piece {
 		this.deslocamento_x = deslocamento_x;
 		this.deslocamento_y = deslocamento_y;
 	}
+
+	//Getters e Setters da classe Piece	
 
 	public Type getTypePiece() {
 		return typePiece;

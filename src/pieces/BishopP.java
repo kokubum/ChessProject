@@ -8,7 +8,9 @@ public class BishopP extends Piece {
 		super(Type.BISHOP, pos_x, pos_y, deslocamento_x, deslocamento_y);
 		this.isWhite = isWhite;
 	}
-
+	
+	//Getters e Setters da classe BishopP
+	
 	public boolean isWhite() {
 		return isWhite;
 	}

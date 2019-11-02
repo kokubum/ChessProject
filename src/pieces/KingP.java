@@ -8,6 +8,8 @@ public class KingP extends Piece {
 		this.isWhite = isWhite;
 	}
 
+	//Getters e Setters da classe KingP
+	
 	public boolean isWhite() {
 		return isWhite;
 	}

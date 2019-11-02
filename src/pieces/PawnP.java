@@ -7,6 +7,8 @@ public class PawnP extends Piece {
 		super(Type.PAWN, pos_x, pos_y, deslocamento_x, deslocamento_y);
 		this.isWhite = isWhite;
 	}
+	
+	//Getters e Setters da classe PawnP
 
 	public boolean isWhite() {
 		return isWhite;

@@ -8,6 +8,8 @@ public class TowerP extends Piece {
 		this.isWhite = isWhite;
 	}
 
+	//Getters e Setters da classe ToweP	
+	
 	public boolean isWhite() {
 		return isWhite;
 	}

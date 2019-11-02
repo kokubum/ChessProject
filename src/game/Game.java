@@ -6,18 +6,21 @@ import chronometer.Chronometer;
 public class Game {
 	
 	private Player player1, player2;
-	private BoardGame boardGame;
-	private static int gameNumber = 0;
-	private int level;
+	private BoardGame boardGame; //Tabuleiro de xadrez
+	private static int gameNumber = 0; //Numero do jogo que será iniciado (static = caracterista da classe jogo, antes de ser instânciada)
+	private int level; //Nivel de dificuldade do jogo | Intimamente relacionado ao funcionamento do cronômetro
 	private Chronometer chronometer;
 	
+	//Construtor do Game vai instanciar todos os seus objetos devido a agregação forte relacionada a ele
 	public Game(String nickPlayer1, String nickPlayer2, boolean whitePlayer1, boolean whitePlayer2,int level) {
 		this.player1 = new Player(nickPlayer1, whitePlayer1);
 		this.player2 = new Player(nickPlayer2, whitePlayer2);
 		this.boardGame = new BoardGame();
-		++gameNumber;
+		++gameNumber; //A cada jogo criado seu numero irá ser modificado
 		this.level = level;
 	}
+	
+	//Getter e Setters da classe Game
 
 	public Player getPlayer1() {
 		return player1;
