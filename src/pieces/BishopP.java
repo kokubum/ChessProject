@@ -6,8 +6,8 @@ public class BishopP extends Piece {
 	
 	private boolean isWhite;
 	
-	public BishopP(boolean isWhite, int pos_x, int pos_y, int deslocamento_x, int deslocamento_y) {
-		super(TypePiece.BISHOP, pos_x, pos_y, deslocamento_x, deslocamento_y);
+	public BishopP(boolean isWhite, Position position) {
+		super(TypePiece.BISHOP,position);
 		this.isWhite = isWhite;
 	}
 	
