@@ -1,5 +1,5 @@
-package pieces;
+package game.enums;
 
-public enum Type {
+public enum TypePiece {
 	BISHOP, QUEEN, KING, PAWN, HORSE, TOWER
 }

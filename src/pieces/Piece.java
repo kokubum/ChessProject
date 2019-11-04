@@ -1,11 +1,13 @@
 package pieces;
 
+import game.enums.TypePiece;
+
 public class Piece {
-	private Type typePiece;
+	private TypePiece typePiece;
 	private int pos_x, pos_y; //Posição da peça no tabuleiro (coordenadas x e y)
 	private int deslocamento_x, deslocamento_y;//Forma de deslocamento da peça
 	
-	public Piece(Type typePiece, int pos_x, int pos_y, int deslocamento_x, int deslocamento_y) {
+	public Piece(TypePiece typePiece, int pos_x, int pos_y, int deslocamento_x, int deslocamento_y) {
 		
 		this.typePiece = typePiece;
 		this.pos_x = pos_x;
@@ -16,11 +18,11 @@ public class Piece {
 
 	//Getters e Setters da classe Piece	
 
-	public Type getTypePiece() {
+	public TypePiece getTypePiece() {
 		return typePiece;
 	}
 
-	public void setTypePiece(Type typePiece) {
+	public void setTypePiece(TypePiece typePiece) {
 		this.typePiece = typePiece;
 	}
 
