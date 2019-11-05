@@ -29,22 +29,23 @@ public class BoardGame{
 		//Intanciando os cavalos
 		for(int i=1;i<7;i+=5) {
 			//Cavalos Brancos
-			this.getBoardMatrix()[0][i] = new TowerP(true,new Position(0,i));
+			this.getBoardMatrix()[0][i] = new HorseP(true,new Position(0,i));
 			//Cavalos Pretos
-			this.getBoardMatrix()[7][i] = new TowerP(false,new Position(0,i));
+			this.getBoardMatrix()[7][i] = new HorseP(false,new Position(0,i));
 		}
 		//Instanciando os bispos
 		for(int i=2;i<6;i+=3) {
 			//Bispos Brancos
-			this.getBoardMatrix()[0][i] = new TowerP(true,new Position(0,i));
+			this.getBoardMatrix()[0][i] = new BishopP(true,new Position(0,i));
 			//Bispos Pretos
-			this.getBoardMatrix()[7][i] = new TowerP(true,new Position(0,i));
+			this.getBoardMatrix()[7][i] = new BishopP(false,new Position(0,i));
 		}
 		//Instanciando o Rei e a Rainha
-		for(int i=0;i<8;i+=7) {
-			this.getBoardMatrix()[i][3] = new KingP(true,new Position(i,3));
-			this.getBoardMatrix()[i][4] = new QueenP(true,new Position(i,4));
-		}
+		this.getBoardMatrix()[0][4] = new KingP(true,new Position(0,4));
+		this.getBoardMatrix()[0][3] = new QueenP(true,new Position(0,3));
+		this.getBoardMatrix()[7][4] = new KingP(false,new Position(0,4));
+		this.getBoardMatrix()[7][3] = new QueenP(false,new Position(0,3));
+		
 	}
 
 	public Piece[][] getBoardMatrix() {
