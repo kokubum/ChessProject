@@ -7,7 +7,7 @@ import game.enums.TypePiece;
 public abstract class Piece {
 	private TypePiece typePiece;
 	private Position position; //Posição da peça no tabuleiro (coordenadas x e y)
-	private ArrayList<Position> moves;
+	private ArrayList<Position> moves; //ArrayList com todas as possiveis movimentações da peça
 	
 	
 	public Piece(TypePiece typePiece, Position position) {
