@@ -12,6 +12,35 @@ public class PawnP extends Piece {
 		this.isWhite = isWhite;
 	}
 	
+	/*Movimentação para frente de um peão
+		public PawnP moveFoward() {
+			Position newPosition;
+			
+			//O peão é do time branco
+			if(this.isWhite) {
+				newPosition = super.getPosition();
+				if(newPosition.getX() < 7) {
+					newPosition.setX(newPosition.getX()+1);
+					super.setPosition(newPosition);
+				}
+				else {
+					//Não pode ser movimentado, a peça está na borda do tabuleiro
+				}
+			}
+			//O peão é do time preto
+			else {
+				newPosition = super.getPosition();
+				if(newPosition.getX() > 0) {
+					newPosition.setX(newPosition.getX()-1);
+					super.setPosition(newPosition);
+				}
+				else {
+					//Não pode ser movimentado, a peça está na borda do tabuleiro
+				}
+			}
+			return this;
+		}
+	*/
 	//Getters e Setters da classe PawnP
 
 	public boolean isWhite() {
