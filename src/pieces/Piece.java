@@ -14,7 +14,7 @@ public abstract class Piece {
 		
 		this.moves = new ArrayList<Position>();
 		this.typePiece = typePiece;
-		this.setPosition(position);
+		this.position = position;
 	}
 	
 	//Método que define os movimentos possiveis da peça
@@ -43,6 +43,10 @@ public abstract class Piece {
 
 	public ArrayList<Position> getMoves() {
 		return moves;
+	}
+
+	public void setMoves(ArrayList<Position> moves) {
+		this.moves = moves;
 	}
 	
 }
