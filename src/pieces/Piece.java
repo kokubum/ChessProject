@@ -2,7 +2,7 @@ package pieces;
 
 import game.enums.TypePiece;
 
-public class Piece {
+public abstract class Piece {
 	private TypePiece typePiece;
 	private Position position; //Posição da peça no tabuleiro (coordenadas x e y)
 	
@@ -29,9 +29,5 @@ public class Piece {
 
 	public void setPosition(Position position) {
 		this.position = position;
-	}
-	
-	
-
-	
+	}	
 }
