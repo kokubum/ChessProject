@@ -1,17 +1,27 @@
 package pieces;
 
+import java.util.ArrayList;
+
 import game.enums.TypePiece;
 
-public class Piece {
+public abstract class Piece {
 	private TypePiece typePiece;
 	private Position position; //Posição da peça no tabuleiro (coordenadas x e y)
+	private ArrayList<Position> moves;
+	
 	
 	public Piece(TypePiece typePiece, Position position) {
 		
+		this.moves = new ArrayList<Position>();
 		this.typePiece = typePiece;
 		this.setPosition(position);
 	}
-
+	
+	//Método que define os movimentos possiveis da peça
+	public abstract ArrayList<Position> possibleMoves();
+	//Método para checar se determinada posição escolhida pode ser uma possibilidade
+	public abstract boolean isPossible(Position position);
+	
 	//Getters e Setters da classe Piece	
 
 	public TypePiece getTypePiece() {
@@ -30,8 +40,9 @@ public class Piece {
 	public void setPosition(Position position) {
 		this.position = position;
 	}
-	
-	
 
+	public ArrayList<Position> getMoves() {
+		return moves;
+	}
 	
 }

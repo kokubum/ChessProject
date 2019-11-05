@@ -1,5 +1,7 @@
 package pieces;
 
+import java.util.ArrayList;
+
 import game.enums.TypePiece;
 
 public class QueenP extends Piece{
@@ -18,6 +20,18 @@ public class QueenP extends Piece{
 
 	public void setWhite(boolean isWhite) {
 		this.isWhite = isWhite;
+	}
+
+	@Override
+	public ArrayList<Position> possibleMoves() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isPossible(Position position) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
