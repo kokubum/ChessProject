@@ -20,7 +20,7 @@ public class BishopP extends Piece {
 		varias possiveis movimentações*/
 		Position aux = new Position(this.getPosition().getX(),this.getPosition().getY());
 		
-		//Determinando se a peça pode ir para diagonal direita superior
+		//Determinando se a peça pode ir para diagonal direita inferior
 		while(aux.getX()+1<=7 && aux.getY()+1<=7) {
 			aux.setX(aux.getX()+1);
 			aux.setY(aux.getY()+1);
@@ -30,7 +30,7 @@ public class BishopP extends Piece {
 		aux.setY(this.getPosition().getY());
 		aux.setX(this.getPosition().getX());
 			
-		//Determinando se a peça pode ir para diagonal esquerda superior
+		//Determinando se a peça pode ir para diagonal esquerda inferior
 		while(aux.getX()+1<=7 && aux.getY()-1>=0) {
 			aux.setX(aux.getX()+1);
 			aux.setY(aux.getY()-1);
@@ -41,7 +41,7 @@ public class BishopP extends Piece {
 		aux.setY(this.getPosition().getY());
 		aux.setX(this.getPosition().getX());
 				
-		//Determinando se a peça pode ir para diagonal direita inferior
+		//Determinando se a peça pode ir para diagonal direita superior
 		while(aux.getX()-1>=0 && aux.getY()+1<=7) {
 			aux.setX(aux.getX()-1);
 			aux.setY(aux.getY()+1);
@@ -52,7 +52,7 @@ public class BishopP extends Piece {
 		aux.setY(this.getPosition().getY());
 		aux.setX(this.getPosition().getX());
 				
-		//Determinando se a peça pode ir para diagonal esquerda inferior
+		//Determinando se a peça pode ir para diagonal esquerda superior
 		while(aux.getX()-1>=0 && aux.getY()-1>=0) {
 			aux.setX(aux.getX()-1);
 			aux.setY(aux.getY()-1);
