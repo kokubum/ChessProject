@@ -50,6 +50,7 @@ public class BoardGame{
 	}
 	
 	//Método para inicializar o tabuleiro como null em todas suas posiçoes
+	
 	/*obs: Por padrão o java ja inicia a matriz como sendo referências nulas (para strings ou objetos), mas para melhor entendimento foi criado 
 	 * esse método*/
 	public void initialBoard() {

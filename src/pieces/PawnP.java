@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import game.enums.TypePiece;
 
 public class PawnP extends Piece {
-	private boolean isWhite;
 	
 	public PawnP(boolean isWhite, Position position) {
-		super(TypePiece.PAWN, position);
-		this.isWhite = isWhite;
+		super(TypePiece.PAWN, position,isWhite);
 	}
 	
 	/* Coloquei no array dos movimentos possiveis as movimentaçoes em diagonais do peão pois não da pra passar aqui o tabuleiro do jogo,
@@ -91,16 +89,6 @@ public class PawnP extends Piece {
 		}
 	}
 	
-	
-	//Getters e Setters da classe PawnP
-
-	public boolean isWhite() {
-		return isWhite;
-	}
-
-	public void setWhite(boolean isWhite) {
-		this.isWhite = isWhite;
-	}
 
 	
 

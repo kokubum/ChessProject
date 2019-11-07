@@ -2,7 +2,6 @@ package game;
 
 import board.BoardGame;
 import chronometer.Chronometer;
-import game.enums.TypePiece;
 import pieces.*;
 
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class Game {
 		this.player1 = new Player(nickPlayer1, whitePlayer1);
 		this.player2 = new Player(nickPlayer2, whitePlayer2);
 		this.boardGame = new BoardGame();
-		++gameNumber; //A cada jogo criado seu numero irá ser modificado
+		++gameNumber; //A cada jogo criado seu número irá ser modificado
 		this.level = level;
 	}
 	
@@ -34,51 +33,21 @@ public class Game {
 		
 		//verificando se o jogador é do time branco e se ele clicou em uma peça do time branco
 		if(player.isWhitePlayer()) {
-			if(piece.getTypePiece() == TypePiece.PAWN && (((PawnP) piece).isWhite())) {
-				moves = piece.possibleMoves();
-			}
-			else if(piece.getTypePiece() == TypePiece.TOWER && (((TowerP) piece).isWhite())) {
-				moves = piece.possibleMoves();
-			}
-			else if(piece.getTypePiece() == TypePiece.HORSE && (((HorseP) piece).isWhite())) {
-				moves = piece.possibleMoves();
-			}
-			else if(piece.getTypePiece() == TypePiece.BISHOP && (((BishopP) piece).isWhite())) {
-				moves = piece.possibleMoves();
-			}
-			else if(piece.getTypePiece() == TypePiece.QUEEN && (((QueenP) piece).isWhite())) {
-				moves = piece.possibleMoves();
-			}
-			else if(piece.getTypePiece() == TypePiece.KING && (((KingP) piece).isWhite())) {
-				moves = piece.possibleMoves();
+			if(piece.isWhite()){
+				moves = piece.getMoves(); //Método polimorfico, logo não precisa de instance of, nem casting
 			}
 			else {
-				//A peça é do time preto
+				//A peça é do time preto e o jogador é do time branco
 			}
 		}
 		//Verificando se o jogador é do time preto e se ele clicou em uma peça do time preto
 		else {
 			if(!player.isWhitePlayer()) {
-				if(piece.getTypePiece() == TypePiece.PAWN && !(((PawnP) piece).isWhite())) {
-					moves = piece.possibleMoves();
-				}
-				else if(piece.getTypePiece() == TypePiece.TOWER && !(((TowerP) piece).isWhite())) {
-					moves = piece.possibleMoves();
-				}
-				else if(piece.getTypePiece() == TypePiece.HORSE && !(((HorseP) piece).isWhite())) {
-					moves = piece.possibleMoves();
-				}
-				else if(piece.getTypePiece() == TypePiece.BISHOP && !(((BishopP) piece).isWhite())) {
-					moves = piece.possibleMoves();
-				}
-				else if(piece.getTypePiece() == TypePiece.QUEEN && !(((QueenP) piece).isWhite())) {
-					moves = piece.possibleMoves();
-				}
-				else if(piece.getTypePiece() == TypePiece.KING && !(((KingP) piece).isWhite())) {
-					moves = piece.possibleMoves();
+				if(!piece.isWhite()) {
+					moves = piece.getMoves(); //Método polimorfico, logo não precisa de instance of, nem casting
 				}
 				else {
-					//A peça ja foi verificada para o time branco, é impossivel este caso acontecer
+					//A peça é do time preto e a peça é do time branco
 				}
 			}
 		}
@@ -87,27 +56,16 @@ public class Game {
 	}
 	
 	//Método que é chamado quando um peão atravessa o tabuleiro ou pode ser chamado depois de realizado uma movimentação
-	public QueenP turnQueen(PawnP pawn) {
-		Position position;
-		position = pawn.getPosition();
-		
-		BoardGame auxBoard;
-		auxBoard = this.getBoardGame();
-		
+	public void turnQueen(PawnP pawn) {
 		//Tratanto para os peões do time branco e se ele atravessou o mapa
 		if(pawn.isWhite() && (pawn.getPosition().getX() == 7)) {
-			auxBoard.getBoardMatrix()[7][position.getY()] = new QueenP(true, position);
-			return (QueenP) auxBoard.getBoardMatrix()[7][position.getY()];
+			this.getBoardGame().getBoardMatrix()[7][pawn.getPosition().getY()] = new QueenP(true, pawn.getPosition());
 		}
 		//Tratando para os peões do time preto e se ele atravessou o mapa
 		else if(!pawn.isWhite() && (pawn.getPosition().getX() == 0)){
-			auxBoard.getBoardMatrix()[0][position.getY()] = new QueenP(false, position);
-			return (QueenP) auxBoard.getBoardMatrix()[0][position.getY()];
+			this.getBoardGame().getBoardMatrix()[0][pawn.getPosition().getY()] = new QueenP(false, pawn.getPosition());
 		}
-		else {
-			//Não realiza nada pois o peão seja de qual time for não atravessou o mapa
-			return null;
-		}
+		
 	}
 	
 	//Getter e Setters da classe Game

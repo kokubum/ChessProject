@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import game.enums.TypePiece;
 
 public class QueenP extends Piece{
-	private boolean isWhite;
 	
 	public QueenP(boolean isWhite, Position position) {
-		super(TypePiece.QUEEN, position);
-		this.isWhite = isWhite;
+		super(TypePiece.QUEEN, position,isWhite);
 	}
 	
 	@Override
@@ -113,14 +111,6 @@ public class QueenP extends Piece{
 		}
 	}
 	
-	//Getters e Setters da classe QueenP
-
-	public boolean isWhite() {
-		return isWhite;
-	}
-
-	public void setWhite(boolean isWhite) {
-		this.isWhite = isWhite;
-	}
+	
 
 }
