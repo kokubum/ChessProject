@@ -29,12 +29,52 @@ public class Game {
 	
 	public ArrayList<Position> showPossiblesMoves(Player player, Piece piece){
 		ArrayList<Position>moves;
-		moves = null;
-		
+		moves = null;	
 		//verificando se o jogador é do time branco e se ele clicou em uma peça do time branco
 		if(player.isWhitePlayer()) {
 			if(piece.isWhite()){
 				moves = piece.possibleMoves(); //Método polimorfico, logo não precisa de instance of, nem casting
+				//Se a peça for uma instância de peão precisa analisar se tem alguma peca na sua diagonal;
+				if(piece instanceof PawnP) {
+					//Se o peão estiver na borda esquerda
+					if(piece.getPosition().getY() == 0) {
+						//Se em sua diagonal direita inferior tiver uma peça
+						if(this.boardGame.getBoardMatrix()[piece.getPosition().getX()+1][1]!=null) {
+							//Se essa peça for uma peça preta
+							if(this.boardGame.getBoardMatrix()[piece.getPosition().getX()+1][1].isWhite()==false) {
+								moves.add(new Position(piece.getPosition().getX()+1,1)); //Então essa será uma possível movimentação
+							}
+						}
+					}
+					//Se o peão estiver na borda direita
+					else if (piece.getPosition().getY() == 7) {
+						//Se em sua diagonal esquerda inferior tiver uma peça
+						if(this.boardGame.getBoardMatrix()[piece.getPosition().getX()+1][6]!=null) {
+							//se essa peça for uma peça preta
+							if(this.boardGame.getBoardMatrix()[piece.getPosition().getX()+1][6].isWhite()==false) {
+								moves.add(new Position(piece.getPosition().getX()+1,6));//Então essa será uma possível movimentação
+							}
+						}
+					}
+					//Se o peão estiver pelo centro
+					else {
+						//Se em sua diagonal esquerda inferior tiver uma peça
+						if(this.boardGame.getBoardMatrix()[piece.getPosition().getX()+1][piece.getPosition().getY()-1]!=null) {
+							//Se essa peça for uma peça preta
+							if(this.boardGame.getBoardMatrix()[piece.getPosition().getX()+1][piece.getPosition().getY()-1].isWhite()==false) {
+								moves.add(new Position(piece.getPosition().getX()+1,piece.getPosition().getY()-1));
+							}
+						}
+						//Se em sua diagonal direita inferior tiver uma peça
+						if(this.boardGame.getBoardMatrix()[piece.getPosition().getX()+1][piece.getPosition().getY()+1]!=null) {
+							//Se essa peça for uma peça preta
+							if(this.boardGame.getBoardMatrix()[piece.getPosition().getX()+1][piece.getPosition().getY()+1].isWhite()==false) {
+								moves.add(new Position(piece.getPosition().getX()+1,piece.getPosition().getY()+1));
+							}
+						}
+						
+					}
+				}
 			}
 			else {
 				//A peça é do time preto e o jogador é do time branco
@@ -43,8 +83,49 @@ public class Game {
 		//Verificando se o jogador é do time preto e se ele clicou em uma peça do time preto
 		else {
 			if(!player.isWhitePlayer()) {
-				if(!piece.isWhite()) {
+				if(!piece.isWhite()){
 					moves = piece.possibleMoves(); //Método polimorfico, logo não precisa de instance of, nem casting
+					//Se a peça for uma instância de peão precisa analisar se tem alguma peca na sua diagonal;
+					if(piece instanceof PawnP) {
+						//Se o peão estiver na borda esquerda
+						if(piece.getPosition().getY() == 0) {
+							//Se em sua diagonal direita superior tiver uma peça
+							if(this.boardGame.getBoardMatrix()[piece.getPosition().getX()-1][1]!=null) {
+								//Se essa peça for uma peça branca
+								if(this.boardGame.getBoardMatrix()[piece.getPosition().getX()+1][1].isWhite()) {
+									moves.add(new Position(piece.getPosition().getX()-1,1)); //Então essa será uma possível movimentação
+								}
+							}
+						}
+						//Se o peão estiver na borda direita
+						else if (piece.getPosition().getY() == 7) {
+							//Se em sua diagonal esquerda superior tiver uma peça
+							if(this.boardGame.getBoardMatrix()[piece.getPosition().getX()-1][6]!=null) {
+								//se essa peça for uma peça branca
+								if(this.boardGame.getBoardMatrix()[piece.getPosition().getX()-1][6].isWhite()) {
+									moves.add(new Position(piece.getPosition().getX()-1,6));//Então essa será uma possível movimentação
+								}
+							}
+						}
+						//Se o peão estiver pelo centro
+						else {
+							//Se em sua diagonal esquerda superior tiver uma peça
+							if(this.boardGame.getBoardMatrix()[piece.getPosition().getX()-1][piece.getPosition().getY()-1]!=null) {
+								//Se essa peça for uma peça branca
+								if(this.boardGame.getBoardMatrix()[piece.getPosition().getX()-1][piece.getPosition().getY()-1].isWhite()) {
+									moves.add(new Position(piece.getPosition().getX()-1,piece.getPosition().getY()-1));
+								}
+							}
+							//Se em sua diagonal direita superior tiver uma peça
+							if(this.boardGame.getBoardMatrix()[piece.getPosition().getX()-1][piece.getPosition().getY()+1]!=null) {
+								//Se essa peça for uma peça preta
+								if(this.boardGame.getBoardMatrix()[piece.getPosition().getX()-1][piece.getPosition().getY()+1].isWhite()) {
+									moves.add(new Position(piece.getPosition().getX()-1,piece.getPosition().getY()+1));
+								}
+							}
+							
+						}
+					}
 				}
 				else {
 					//A peça é do time preto e a peça é do time branco
@@ -59,11 +140,11 @@ public class Game {
 	public void turnQueen(PawnP pawn) {
 		//Tratanto para os peões do time branco e se ele atravessou o mapa
 		if(pawn.isWhite() && (pawn.getPosition().getX() == 7)) {
-			this.getBoardGame().getBoardMatrix()[7][pawn.getPosition().getY()] = new QueenP(true, pawn.getPosition());
+			this.boardGame.getBoardMatrix()[7][pawn.getPosition().getY()] = new QueenP(true, pawn.getPosition());
 		}
 		//Tratando para os peões do time preto e se ele atravessou o mapa
 		else if(!pawn.isWhite() && (pawn.getPosition().getX() == 0)){
-			this.getBoardGame().getBoardMatrix()[0][pawn.getPosition().getY()] = new QueenP(false, pawn.getPosition());
+			this.boardGame.getBoardMatrix()[0][pawn.getPosition().getY()] = new QueenP(false, pawn.getPosition());
 		}
 		
 	}
