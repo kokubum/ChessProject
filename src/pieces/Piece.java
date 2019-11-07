@@ -16,7 +16,7 @@ public abstract class Piece {
 		this.moves = new ArrayList<Position>();
 		this.typePiece = typePiece;
 		this.position = position;
-		this.setWhite(isWhite);
+		this.isWhite = isWhite;
 	}
 	
 	//Método que define os movimentos possiveis da peça

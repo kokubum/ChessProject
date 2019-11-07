@@ -34,7 +34,7 @@ public class Game {
 		//verificando se o jogador é do time branco e se ele clicou em uma peça do time branco
 		if(player.isWhitePlayer()) {
 			if(piece.isWhite()){
-				moves = piece.getMoves(); //Método polimorfico, logo não precisa de instance of, nem casting
+				moves = piece.possibleMoves(); //Método polimorfico, logo não precisa de instance of, nem casting
 			}
 			else {
 				//A peça é do time preto e o jogador é do time branco
@@ -44,7 +44,7 @@ public class Game {
 		else {
 			if(!player.isWhitePlayer()) {
 				if(!piece.isWhite()) {
-					moves = piece.getMoves(); //Método polimorfico, logo não precisa de instance of, nem casting
+					moves = piece.possibleMoves(); //Método polimorfico, logo não precisa de instance of, nem casting
 				}
 				else {
 					//A peça é do time preto e a peça é do time branco
