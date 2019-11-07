@@ -2,6 +2,7 @@ package game;
 
 import board.BoardGame;
 import chronometer.Chronometer;
+import game.enums.TypePiece;
 import pieces.*;
 
 import java.util.ArrayList;
@@ -36,6 +37,13 @@ public class Game {
 				moves = piece.possibleMoves(); //Método polimorfico, logo não precisa de instance of, nem casting
 				//Se a peça for uma instância de peão precisa analisar se tem alguma peca na sua diagonal;
 				if(piece instanceof PawnP) {
+					//Implementação da jogada  En Passant
+					if(this.boardGame.getBoardMatrix()[piece.getPosition().getX()+2][piece.getPosition().getY()].getTypePiece()==TypePiece.PAWN){ 
+						//Testa se o peão é preto
+						if(this.boardGame.getBoardMatrix()[piece.getPosition().getX()+2][piece.getPosition().getY()].isWhite()==false) {
+							moves.add(new Position(piece.getPosition().getX()+2,piece.getPosition().getY()));
+						}
+					}
 					//Se o peão estiver na borda esquerda
 					if(piece.getPosition().getY() == 0) {
 						//Se em sua diagonal direita inferior tiver uma peça
@@ -87,6 +95,13 @@ public class Game {
 					moves = piece.possibleMoves(); //Método polimorfico, logo não precisa de instance of, nem casting
 					//Se a peça for uma instância de peão precisa analisar se tem alguma peca na sua diagonal;
 					if(piece instanceof PawnP) {
+						//Implementação da jogada  En Passant
+						if(this.boardGame.getBoardMatrix()[piece.getPosition().getX()-2][piece.getPosition().getY()].getTypePiece()==TypePiece.PAWN){
+							//Testa se o peão é branco
+							if(this.boardGame.getBoardMatrix()[piece.getPosition().getX()-2][piece.getPosition().getY()].isWhite()) {
+								moves.add(new Position(piece.getPosition().getX()-2,piece.getPosition().getY()));
+							}
+						}
 						//Se o peão estiver na borda esquerda
 						if(piece.getPosition().getY() == 0) {
 							//Se em sua diagonal direita superior tiver uma peça
