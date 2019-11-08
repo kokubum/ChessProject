@@ -19,13 +19,13 @@ public class KingP extends Piece {
 		boolean diagonalDI = false;
 		boolean diagonalEI = false;
 		
-		//Determinando se a peça pode ir para cima
+		//Determinando se a peça pode ir para baixo
 		if(this.getPosition().getX()+1<=7) {
 			moves.add(new Position(this.getPosition().getX()+1,this.getPosition().getY()));
 			diagonalDS = true;
 			diagonalES = true;
 		}
-		//Determinando se a peça pode ir para baixo
+		//Determinando se a peça pode ir para cima
 		if(this.getPosition().getX()-1>=0) {
 			moves.add(new Position(this.getPosition().getX()-1,this.getPosition().getY()));
 			diagonalDI = true;

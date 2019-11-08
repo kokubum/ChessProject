@@ -18,7 +18,7 @@ public class TowerP extends Piece {
 		varias possiveis movimentações*/
 		Position aux = new Position(this.getPosition().getX(),this.getPosition().getY());
 		
-		//Determinando se a peça pode ir para cima
+		//Determinando se a peça pode ir pra baixo
 		while(aux.getX()+1<=7) {
 			aux.setX(aux.getX()+1);
 			moves.add(new Position(aux.getX(),aux.getY()));
@@ -26,7 +26,7 @@ public class TowerP extends Piece {
 		
 		//Reinicializado a váriável
 		aux.setX(this.getPosition().getX());
-		//Determinando se a peça pode ir para baixo
+		//Determinando se a peça pode ir para cima
 		while(aux.getX()-1>=0) {
 			aux.setX(aux.getX()-1);
 			moves.add(new Position(aux.getX(),aux.getY()));

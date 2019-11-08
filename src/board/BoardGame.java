@@ -13,6 +13,7 @@ public class BoardGame{
 	
 	//Encapsulamento -> Metodo para instanciar as 32 peças
 	public void pieceInTheBoard() {
+		
 		//Instanciando os peões no tabuleiro
 		for(int i=0;i<8;i++) {
 			//Peões Brancos
@@ -46,6 +47,8 @@ public class BoardGame{
 		this.getBoardMatrix()[0][3] = new QueenP(true,new Position(0,3));
 		this.getBoardMatrix()[7][4] = new KingP(false,new Position(7,4));
 		this.getBoardMatrix()[7][3] = new QueenP(false,new Position(7,3));
+		
+		this.getBoardMatrix()[2][3] = new PawnP(true,new Position(2,3));
 		
 	}
 	

@@ -26,7 +26,6 @@ public class PawnP extends Piece {
 			if(this.firstMove == true) {
 				moves.add(new Position(this.getPosition().getX()+1,this.getPosition().getY()));
 				moves.add(new Position(this.getPosition().getX()+2,this.getPosition().getY()));
-				this.firstMove = false;
 			}
 			//Tratando os peões que ja se moveram
 			else{
@@ -39,7 +38,6 @@ public class PawnP extends Piece {
 			if(this.firstMove == true) {
 				moves.add(new Position(this.getPosition().getX()-1,this.getPosition().getY()));
 				moves.add(new Position(this.getPosition().getX()-2,this.getPosition().getY()));
-				this.firstMove = false;
 			}
 			//Tratando os peões que ja se moveram
 			else {

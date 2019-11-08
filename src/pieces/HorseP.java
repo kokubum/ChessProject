@@ -14,7 +14,7 @@ public class HorseP extends Piece {
 	@Override
 	public ArrayList<Position> possibleMoves() {
 		ArrayList<Position>moves = new ArrayList<Position>();
-		//Determinando se a peça pode se mover (em formato L) para cima
+		//Determinando se a peça pode se mover (em formato L) para baixo
 		if(this.getPosition().getX()+2<=7) {
 			if(this.getPosition().getY()+1<=7) {
 				moves.add(new Position(this.getPosition().getX()+2,this.getPosition().getY()+1));
@@ -24,7 +24,7 @@ public class HorseP extends Piece {
 			}
 		}
 		
-		//Determinando se a peça pode se mover (em formato L) para baixo
+		//Determinando se a peça pode se mover (em formato L) para cimas
 		if(this.getPosition().getX()-2>=0) {
 			if(this.getPosition().getY()+1<=7) {
 				moves.add(new Position(this.getPosition().getX()-2,this.getPosition().getY()+1));
