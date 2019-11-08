@@ -28,9 +28,20 @@ public class Game {
 	
 	//Método para movimentar uma peça
 	public void movePiece(Position position,Piece piece,Player player) {
+		//Crio uma arrayList auxiliar para receber as movimentaçoes possiveis, devido ao Overload no metodo showPossibleMoves()
+		ArrayList<Position> auxiliarMoves=null;
 		//Crio uma variável booleana para dizer se o jogador escolheu um local válido
 		boolean isPossible=false;
-		for(Position aux:this.showPossibleMoves(player,piece)) {
+		//Se a peça for um peão preciso fazer um casting e passar o metodo para o arrayList auxiliar com seu metodo correspondente
+		if(piece instanceof PawnP) {
+			PawnP pawn = (PawnP)piece;
+			auxiliarMoves = this.showPossibleMoves(player, pawn);
+		}
+		else {
+			auxiliarMoves = this.showPossibleMoves(player,piece);
+		}
+		
+		for(Position aux:auxiliarMoves) {
 			//Se a posição escolhida estiver na lista de possiveis movimentações, entao isPossible = true
 			if(position.equals(aux)) {
 				isPossible=true;
@@ -41,7 +52,7 @@ public class Game {
 			this.boardGame.getBoardMatrix()[position.getX()][position.getY()]=piece;
 			//A posiçao anterior da peça ira referenciar null, indicando que não há mais uma peça ali
 			this.boardGame.getBoardMatrix()[piece.getPosition().getX()][piece.getPosition().getY()]=null;
-			//Logo, para finalizar a movimentação setamos a posição da peça para a posição que ela ira se mover
+			//Logo, para finalizar a movimentação setamos a posição da peça para a posição que ela ira se mover	
 			piece.setPosition(position);
 		}
 		else {
