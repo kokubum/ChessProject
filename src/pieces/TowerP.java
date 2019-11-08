@@ -5,27 +5,52 @@ import java.util.ArrayList;
 import game.enums.TypePiece;
 
 public class TowerP extends Piece {
-	private boolean isWhite;
 	
 	public TowerP(boolean isWhite, Position position) {
-		super(TypePiece.TOWER, position);
-		this.isWhite = isWhite;
+		super(TypePiece.TOWER, position,isWhite);
+		
 	}
-
-	//Getters e Setters da classe ToweP	
 	
-	public boolean isWhite() {
-		return isWhite;
-	}
-
-	public void setWhite(boolean isWhite) {
-		this.isWhite = isWhite;
-	}
-
 	@Override
 	public ArrayList<Position> possibleMoves() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Position>moves = new ArrayList<Position>();
+		/*É necessario a criacao de uma posição auxiliar para não modificar a posição atual da peça ja que a torre tem 
+		varias possiveis movimentações*/
+		Position aux = new Position(this.getPosition().getX(),this.getPosition().getY());
+		
+		//Determinando se a peça pode ir pra baixo
+		while(aux.getX()+1<=7) {
+			aux.setX(aux.getX()+1);
+			moves.add(new Position(aux.getX(),aux.getY()));
+		}
+		
+		//Reinicializado a váriável
+		aux.setX(this.getPosition().getX());
+		//Determinando se a peça pode ir para cima
+		while(aux.getX()-1>=0) {
+			aux.setX(aux.getX()-1);
+			moves.add(new Position(aux.getX(),aux.getY()));
+		}
+		
+		//Reinicializado a váriável
+		aux.setX(this.getPosition().getX());
+		
+		//Determinando se a peça pode ir para a direita
+		while(aux.getY()+1<=7) {
+			aux.setY(aux.getY()+1);
+			moves.add(new Position(aux.getX(),aux.getY()));
+		}
+		
+		//Reinicializando a váriavel
+		aux.setY(this.getPosition().getY());
+		
+		//Determinando se a peça pode ir para esquerda
+		while(aux.getY()-1>=0) {
+			aux.setY(aux.getY()-1);
+			moves.add(new Position(aux.getX(),aux.getY()));
+		}
+		
+		return moves;
 	}
 
 	@Override
@@ -33,5 +58,17 @@ public class TowerP extends Piece {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	public static void main(String[] args) {
+		Position position = new Position(1,4);
+		TowerP piece = new TowerP(true,position);
+		piece.setMoves(piece.possibleMoves());
+
+		for(Position aux:piece.getMoves()) {
+			System.out.println("X-> "+aux.getX()+" Y-> "+aux.getY());
+		}
+	}
+
+
 
 }

@@ -5,16 +5,18 @@ import java.util.ArrayList;
 import game.enums.TypePiece;
 
 public abstract class Piece {
+	private boolean isWhite;	
 	private TypePiece typePiece;
 	private Position position; //Posição da peça no tabuleiro (coordenadas x e y)
 	private ArrayList<Position> moves; //ArrayList com todas as possiveis movimentações da peça
 	
 	
-	public Piece(TypePiece typePiece, Position position) {
+	public Piece(TypePiece typePiece, Position position,boolean isWhite) {
 		
 		this.moves = new ArrayList<Position>();
 		this.typePiece = typePiece;
-		this.setPosition(position);
+		this.position = position;
+		this.isWhite = isWhite;
 	}
 	
 	//Método que define os movimentos possiveis da peça
@@ -43,6 +45,18 @@ public abstract class Piece {
 
 	public ArrayList<Position> getMoves() {
 		return moves;
+	}
+
+	public void setMoves(ArrayList<Position> moves) {
+		this.moves = moves;
+	}
+
+	public boolean isWhite() {
+		return isWhite;
+	}
+
+	public void setWhite(boolean isWhite) {
+		this.isWhite = isWhite;
 	}
 	
 }

@@ -7,11 +7,13 @@ public class BoardGame{
 	
 	public BoardGame() {
 		this.boardMatrix = new Piece[8][8];
+		this.initialBoard();
 		this.pieceInTheBoard();
 	}
 	
 	//Encapsulamento -> Metodo para instanciar as 32 peças
 	public void pieceInTheBoard() {
+		
 		//Instanciando os peões no tabuleiro
 		for(int i=0;i<8;i++) {
 			//Peões Brancos
@@ -46,6 +48,20 @@ public class BoardGame{
 		this.getBoardMatrix()[7][4] = new KingP(false,new Position(7,4));
 		this.getBoardMatrix()[7][3] = new QueenP(false,new Position(7,3));
 		
+		this.getBoardMatrix()[2][3] = new PawnP(true,new Position(2,3));
+		
+	}
+	
+	//Método para inicializar o tabuleiro como null em todas suas posiçoes
+	
+	/*obs: Por padrão o java ja inicia a matriz como sendo referências nulas (para strings ou objetos), mas para melhor entendimento foi criado 
+	 * esse método*/
+	public void initialBoard() {
+		for(int i=0;i<8;i++) {
+			for(int j=0;j<8;j++) {
+				this.getBoardMatrix()[i][j]=null;
+			}
+		}
 	}
 
 	public Piece[][] getBoardMatrix() {
