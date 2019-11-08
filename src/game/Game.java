@@ -26,6 +26,30 @@ public class Game {
 	}
 	
 	
+	//Método para movimentar uma peça
+	public void movePiece(Position position,Piece piece,Player player) {
+		//Crio uma variável booleana para dizer se o jogador escolheu um local válido
+		boolean isPossible=false;
+		for(Position aux:this.showPossibleMoves(player,piece)) {
+			//Se a posição escolhida estiver na lista de possiveis movimentações, entao isPossible = true
+			if(position.equals(aux)) {
+				isPossible=true;
+			}
+		}	
+		if(isPossible) {
+			//Se isPossible == true, entao a posição do tabuleiro ira referenciar a peça
+			this.boardGame.getBoardMatrix()[position.getX()][position.getY()]=piece;
+			//A posiçao anterior da peça ira referenciar null, indicando que não há mais uma peça ali
+			this.boardGame.getBoardMatrix()[piece.getPosition().getX()][piece.getPosition().getY()]=null;
+			//Logo, para finalizar a movimentação setamos a posição da peça para a posição que ela ira se mover
+			piece.setPosition(position);
+		}
+		else {
+			//Usuario clicou em um lugar que não é possivel mover
+		}
+	}
+	
+	
 	/*
 	 Método para remover das movimentações possiveis as posições que possuirem peças da mesma cor que a peça que quer se mover, e quando
 	 alguma peça interromper o caminho
