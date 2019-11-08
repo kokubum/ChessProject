@@ -46,10 +46,7 @@ public class BoardGame{
 		this.getBoardMatrix()[0][4] = new KingP(true,new Position(0,4));
 		this.getBoardMatrix()[0][3] = new QueenP(true,new Position(0,3));
 		this.getBoardMatrix()[7][4] = new KingP(false,new Position(7,4));
-		this.getBoardMatrix()[7][3] = new QueenP(false,new Position(7,3));
-		
-		this.getBoardMatrix()[2][3] = new PawnP(true,new Position(2,3));
-		
+		this.getBoardMatrix()[7][3] = new QueenP(false,new Position(7,3));		
 	}
 	
 	//Método para inicializar o tabuleiro como null em todas suas posiçoes
