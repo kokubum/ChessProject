@@ -48,6 +48,10 @@ public class Game {
 			}
 		}	
 		if(isPossible) {
+			//Verifico se a posição escolhida resulta em um check mate
+			if(isCheckMate(position)) {
+				player.setWinner(true);
+			}
 			//Se isPossible == true, entao a posição do tabuleiro ira referenciar a peça
 			this.boardGame.getBoardMatrix()[position.getX()][position.getY()]=piece;
 			//A posiçao anterior da peça ira referenciar null, indicando que não há mais uma peça ali
@@ -203,6 +207,7 @@ public class Game {
 	public ArrayList<Position> showPossibleMoves(Player player, Piece piece){
 		ArrayList<Position>moves;
 		moves = null;	
+
 		//verificando se o jogador é do time branco e se ele clicou em uma peça do time branco
 		if(player.isWhitePlayer()) {
 			if(piece.isWhite()){
@@ -234,7 +239,7 @@ public class Game {
 		ArrayList<Position>moves;
 		moves = null;
 		Position pos = new Position(pawn.getPosition().getX(),pawn.getPosition().getY());//Usado apenas para diminuir tamanho das chamadas
-		
+
 		//Verificando se o jogador é do time branco e ele clicou em um peão tambem branco
 		if(player.isWhitePlayer()) {
 			if(pawn.isWhite()) {
@@ -336,11 +341,35 @@ public class Game {
 		
 	}
 	
+	//Este método recebe uma posição que é onde a peça irá e se tiver um rei nesta posição é dado check mate
+	public boolean isCheckMate(Position position) {
+		if(this.boardGame.getBoardMatrix()[position.getX()][position.getY()].getTypePiece() == TypePiece.KING) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	//Método que verifica se o jogo acabou atraves do atributo winner de Player
+	public Player gameEnd() {
+		if(this.player1.isWinner()) {
+			return this.player1;
+		}
+		if(this.player2.isWinner()){
+			return this.player2;
+		}
+		else {
+			//nenhum jogador ainda deu check mate
+			return null;
+		}
+	}
 	
 	public static void main(String[] args) {
 		Game game = new Game("Erick","Alberto",true,false,1);
 		Piece piece = game.boardGame.getBoardMatrix()[1][3];
 		System.out.println(piece.getTypePiece());
+		System.out.println(game.showPossibleMoves(game.getPlayer1(), piece));
 		for(Position aux:game.showPossibleMoves(game.player1, piece)) {
 			System.out.println("X-> "+aux.getX()+" Y-> "+aux.getY());
 		}

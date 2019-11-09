@@ -3,10 +3,12 @@ package game;
 public class Player {
 	private String nickName;
 	private boolean whitePlayer;
+	private boolean winner;
 	
 	public Player(String nickName, boolean whitePlayer) {
 		this.nickName = nickName;
 		this.whitePlayer = whitePlayer;
+		this.winner = false;
 	}
 
 	public String getNickName() {
@@ -25,4 +27,11 @@ public class Player {
 		this.whitePlayer = whitePlayer;
 	}
 
+	public boolean isWinner() {
+		return this.winner;
+	}
+	
+	public void setWinner(boolean winner) {
+		this.winner = winner;
+	}
 }
