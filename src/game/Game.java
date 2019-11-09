@@ -51,6 +51,7 @@ public class Game {
 			//Verifico se a posição escolhida resulta em um check mate
 			if(isCheckMate(position)) {
 				player.setWinner(true);
+				//É preciso criar algum metodo para finalizar o jogo, assim não precisaremos ficar checando todo momento
 			}
 			//Se isPossible == true, entao a posição do tabuleiro ira referenciar a peça
 			this.boardGame.getBoardMatrix()[position.getX()][position.getY()]=piece;
