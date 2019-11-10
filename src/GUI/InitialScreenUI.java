@@ -7,6 +7,9 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import game.enums.GameLevel;
+
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -18,9 +21,7 @@ public class InitialScreenUI {
 	private JTextField textFieldPlayer1;
 	private JTextField textFieldPlayer2;
 
-	/**
-	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -34,16 +35,12 @@ public class InitialScreenUI {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
+	
 	public InitialScreenUI() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	
 	private void initialize() {
 		frmChessproject = new JFrame();
 		frmChessproject.setTitle("ChessProject");
@@ -95,8 +92,24 @@ public class InitialScreenUI {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnStart.setBounds(505, 380, 114, 25);
+		btnStart.setBounds(509, 546, 114, 25);
 		frmChessproject.getContentPane().add(btnStart);
+		
+		JLabel lblDificulty = new JLabel("Dificulty");
+		lblDificulty.setBounds(526, 305, 66, 15);
+		frmChessproject.getContentPane().add(lblDificulty);
+		
+		JRadioButton rdbtnBeginner = new JRadioButton("Beginner");
+		rdbtnBeginner.setBounds(227, 405, 144, 23);
+		frmChessproject.getContentPane().add(rdbtnBeginner);
+		
+		JRadioButton rdbtnIntermediate = new JRadioButton("Intermediate");
+		rdbtnIntermediate.setBounds(492, 405, 144, 23);
+		frmChessproject.getContentPane().add(rdbtnIntermediate);
+		
+		JRadioButton rdbtnAdvanced = new JRadioButton("Advanced");
+		rdbtnAdvanced.setBounds(762, 405, 144, 23);
+		frmChessproject.getContentPane().add(rdbtnAdvanced);
 		
 		rdbtnWhiteTeamPlayer1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -110,11 +123,34 @@ public class InitialScreenUI {
 			}
 		});
 		
+		rdbtnBeginner.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				rdbtnIntermediate.setSelected(false);
+				rdbtnAdvanced.setSelected(false);
+			}
+		});
+		
+		rdbtnIntermediate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				rdbtnBeginner.setSelected(false);
+				rdbtnAdvanced.setSelected(false);
+			}
+		});
+		
+		rdbtnAdvanced.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				rdbtnBeginner.setSelected(false);
+				rdbtnIntermediate.setSelected(false);
+			}
+		});
+		
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//Começar jogo
 				String nickName1, nickName2;
 				boolean isWhite1, isWhite2;
+				//Caso o usuario n escolha a difuldade, a mesma será fácil
+				GameLevel level = GameLevel.BEGINNER;
 				
 				//Pegando nome dos jogadores nos FieldText
 				nickName1 = textFieldPlayer1.getName();
@@ -124,7 +160,17 @@ public class InitialScreenUI {
 				isWhite1 = rdbtnWhiteTeamPlayer1.isSelected();
 				isWhite2 = rdbtnWhiteTeamPlayer2.isSelected();
 				
-				GameUI gameWindow = new GameUI(nickName1, isWhite1, nickName2, isWhite2);
+				if(rdbtnBeginner.isSelected()) {
+					level = GameLevel.BEGINNER;
+				}
+				else if(rdbtnIntermediate.isSelected()) {
+					level = GameLevel.INTERMEDIATE;
+				}
+				else if(rdbtnAdvanced.isSelected()) {
+					level = GameLevel.ADVANCED;
+				}
+				
+				GameUI gameWindow = new GameUI(nickName1, nickName2, isWhite1, isWhite2, level);
 				gameWindow.setVisible(true);
 				frmChessproject.dispose();
 			}

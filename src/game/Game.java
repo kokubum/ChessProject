@@ -2,6 +2,7 @@ package game;
 
 import board.BoardGame;
 import chronometer.Chronometer;
+import game.enums.GameLevel;
 import game.enums.TypePiece;
 import pieces.*;
 
@@ -13,11 +14,11 @@ public class Game {
 	private Player player1, player2;
 	private BoardGame boardGame; //Tabuleiro de xadrez
 	private static int gameNumber = 0; //Numero do jogo que será iniciado (static = caracterista da classe jogo, antes de ser instânciada)
-	private int level; //Nivel de dificuldade do jogo | Intimamente relacionado ao funcionamento do cronômetro
+	private GameLevel level; //Nivel de dificuldade do jogo | Intimamente relacionado ao funcionamento do cronômetro
 	private Chronometer chronometer;
 	
 	//Construtor do Game vai instanciar todos os seus objetos devido a agregação forte relacionada a ele
-	public Game(String nickPlayer1, String nickPlayer2, boolean whitePlayer1, boolean whitePlayer2,int level) {
+	public Game(String nickPlayer1, String nickPlayer2, boolean whitePlayer1, boolean whitePlayer2, GameLevel level) {
 		this.player1 = new Player(nickPlayer1, whitePlayer1);
 		this.player2 = new Player(nickPlayer2, whitePlayer2);
 		this.boardGame = new BoardGame();
@@ -51,6 +52,7 @@ public class Game {
 			//Verifico se a posição escolhida resulta em um check mate
 			if(isCheckMate(position)) {
 				player.setWinner(true);
+				//É preciso criar algum metodo para finalizar o jogo, assim não precisaremos ficar checando todo momento
 			}
 			//Se isPossible == true, entao a posição do tabuleiro ira referenciar a peça
 			this.boardGame.getBoardMatrix()[position.getX()][position.getY()]=piece;
@@ -366,7 +368,7 @@ public class Game {
 	}
 	
 	public static void main(String[] args) {
-		Game game = new Game("Erick","Alberto",true,false,1);
+		Game game = new Game("Erick","Alberto",true,false,GameLevel.BEGINNER);
 		Piece piece = game.boardGame.getBoardMatrix()[1][3];
 		System.out.println(piece.getTypePiece());
 		System.out.println(game.showPossibleMoves(game.getPlayer1(), piece));
@@ -409,11 +411,11 @@ public class Game {
 		Game.gameNumber = gameNumber;
 	}
 
-	public int getLevel() {
+	public GameLevel getLevel() {
 		return level;
 	}
 
-	public void setLevel(int level) {
+	public void setLevel(GameLevel level) {
 		this.level = level;
 	}
 
