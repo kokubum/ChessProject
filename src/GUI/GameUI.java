@@ -48,12 +48,6 @@ public class GameUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		Game newGame = Game(nickName1, nickName2, isWhite1, isWhite2, level);
-	}
-
-	private Game Game(String nickName1, String nickName2, boolean isWhite1, boolean isWhite2, GameLevel level) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
