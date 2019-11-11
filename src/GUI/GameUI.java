@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import game.*;
+import game.enums.GameLevel;
 
 public class GameUI extends JFrame {
 
@@ -38,7 +39,7 @@ public class GameUI extends JFrame {
 	}
 
 	//Construtor para abrir a tela principal do jogo
-	public GameUI(String nickName1, boolean isWhite1, String nickName2, boolean isWhite2) {
+	public GameUI(String nickName1, String nickName2, boolean isWhite1, boolean isWhite2, GameLevel level) {
 		setTitle("ChessProject - Game");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 0, 1200, 700);
@@ -46,6 +47,7 @@ public class GameUI extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
 	}
 
 }
