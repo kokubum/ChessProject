@@ -25,7 +25,7 @@ public class BoardUI extends JPanel {
 
 		this.setLayout(new GridLayout(8,8));
 		this.setSize(800, 800);
-		this.setLocation(50, 80);
+		this.setLocation(0,2);
 		this.addBoard();
 	}
 	

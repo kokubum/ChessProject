@@ -27,12 +27,13 @@ public class GameUI extends JFrame {
 		this.setTitle("ChessProject - Game");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(null);
-		this.setSize(1500,1000);
+		this.setSize(1500,835);
 		boardUI = new BoardUI(this.game.getBoardGame());
 		this.handler = new ButtonHandler();
 		this.addActionListener(this.handler);
 		
-		this.getContentPane().add(boardUI);		
+		this.getContentPane().add(boardUI);	
+		
 	
 	}
 	

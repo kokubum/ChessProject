@@ -24,10 +24,10 @@ public class KingP extends Piece {
 	@Override
 	public void createImage() {
 		if(this.isWhite()==true) {
-			this.kingImage = new ImageIcon("/home/kokubum/Eclipse/ChessProject/src/PieceImages/KingPieceWhite.png");
+			this.kingImage = new ImageIcon("src/PieceImages/KingPieceWhite.png");
 		}
 		else {
-			this.kingImage = new ImageIcon("/home/kokubum/Eclipse/ChessProject/src/PieceImages/KingPieceBlack.png");
+			this.kingImage = new ImageIcon("src/PieceImages/KingPieceBlack.png");
 		}
 			
 	}

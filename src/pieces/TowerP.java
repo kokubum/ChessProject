@@ -24,10 +24,10 @@ public class TowerP extends Piece {
 	@Override
 	public void createImage() {
 		if(this.isWhite()==true) {
-			this.towerImage = new ImageIcon("/home/kokubum/Eclipse/ChessProject/src/PieceImages/TowerPieceWhite.png");
+			this.towerImage = new ImageIcon("src/PieceImages/TowerPieceWhite.png");
 		}
 		else {
-			this.towerImage = new ImageIcon("/home/kokubum/Eclipse/ChessProject/src/PieceImages/TowerPieceBlack.png");
+			this.towerImage = new ImageIcon("src/PieceImages/TowerPieceBlack.png");
 		}
 				
 	}

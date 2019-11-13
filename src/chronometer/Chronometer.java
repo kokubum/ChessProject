@@ -1,6 +1,7 @@
 package chronometer;
 
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -38,7 +39,7 @@ public class Chronometer extends JFrame implements ActionListener {
 		//Inicializando a tela do cronômetro java Swing
 		this.setTitle("TIME TO PLAY");
 		this.setResizable(false);
-		this.setSize(300,80);
+		this.setSize(500,80);
 		this.setLocationRelativeTo(null); //Faz com que a tela seja inicializada no centro da tela
 		this.getContentPane().setLayout(new FlowLayout()); 
 		
@@ -51,6 +52,7 @@ public class Chronometer extends JFrame implements ActionListener {
 		time = new Timer(1,this); //Registrando o time como um "ouvinte" a cada 1 milisegundo
 		
 		labelTimer = new JLabel("00 : 00 : 000"); //Inicializando o label
+		labelTimer.setFont(new Font("Serif",Font.PLAIN,40));;
 		
 		//Adicionando os componentes ao JFrame do cronômetro
 		this.getContentPane().add(labelTimer);
