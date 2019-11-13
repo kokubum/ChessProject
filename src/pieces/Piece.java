@@ -2,6 +2,8 @@ package pieces;
 
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import game.enums.TypePiece;
 
 public abstract class Piece {
@@ -9,6 +11,7 @@ public abstract class Piece {
 	private TypePiece typePiece;
 	private Position position; //Posição da peça no tabuleiro (coordenadas x e y)
 	private ArrayList<Position> moves; //ArrayList com todas as possiveis movimentações da peça
+	private ImageIcon pieceImage;
 	
 	
 	public Piece(TypePiece typePiece, Position position,boolean isWhite) {
@@ -19,6 +22,10 @@ public abstract class Piece {
 		this.isWhite = isWhite;
 	}
 	
+	//Método para pegar a imagem referente a peça
+	public abstract ImageIcon getImageIcon();
+	//Método que define qual imagem vai ser associada a peça
+	public abstract void createImage();
 	//Método que define os movimentos possiveis da peça
 	public abstract ArrayList<Position> possibleMoves();
 	//Método para checar se determinada posição escolhida pode ser uma possibilidade
@@ -58,5 +65,6 @@ public abstract class Piece {
 	public void setWhite(boolean isWhite) {
 		this.isWhite = isWhite;
 	}
+
 	
 }

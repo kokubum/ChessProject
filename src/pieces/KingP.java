@@ -2,12 +2,34 @@ package pieces;
 
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import game.enums.TypePiece;
 
 public class KingP extends Piece {
+	private ImageIcon kingImage;
 	
 	public KingP(boolean isWhite, Position position) {
 		super(TypePiece.KING, position,isWhite);
+		this.createImage();
+	}
+	
+	//Método polimórfico para pegar a imagem
+	@Override
+	public ImageIcon getImageIcon() {
+		return this.kingImage;
+	}
+	
+	//Método polimorfico para instanciar a imagem ao objeto;
+	@Override
+	public void createImage() {
+		if(this.isWhite()==true) {
+			this.kingImage = new ImageIcon("/home/kokubum/Eclipse/ChessProject/src/PieceImages/KingPieceWhite.png");
+		}
+		else {
+			this.kingImage = new ImageIcon("/home/kokubum/Eclipse/ChessProject/src/PieceImages/KingPieceBlack.png");
+		}
+			
 	}
 	
 	@Override
@@ -77,6 +99,7 @@ public class KingP extends Piece {
 		}
 		
 	}
+
 
 
 }

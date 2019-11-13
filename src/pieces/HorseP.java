@@ -2,14 +2,36 @@ package pieces;
 
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import game.enums.TypePiece;
 
 public class HorseP extends Piece {
 	
+	private ImageIcon horseImage;
+	
 	public HorseP(boolean isWhite, Position position) {
 		super(TypePiece.HORSE, position,isWhite);
+		this.createImage();
 	}
 	
+	//Método polimórfico para pegar a imagem
+	@Override
+	public ImageIcon getImageIcon() {
+		return this.horseImage;
+	}
+	
+	//Método polimorfico para instanciar a imagem ao objeto;
+	@Override
+	public void createImage() {
+		if(this.isWhite()==true) {
+			this.horseImage = new ImageIcon("/home/kokubum/Eclipse/ChessProject/src/PieceImages/HorsePieceWhite.png");
+		}
+		else {
+			this.horseImage = new ImageIcon("/home/kokubum/Eclipse/ChessProject/src/PieceImages/HorsePieceBlack.png");
+		}
+			
+	}
 
 	@Override
 	public ArrayList<Position> possibleMoves() {

@@ -2,12 +2,34 @@ package pieces;
 
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import game.enums.TypePiece;
 
 public class BishopP extends Piece {
+	private ImageIcon bishopImage;
 	
 	public BishopP(boolean isWhite, Position position) {
 		super(TypePiece.BISHOP,position,isWhite);
+		this.createImage();
+	}
+	
+	//Método polimórfico para pegar a imagem
+	@Override
+	public ImageIcon getImageIcon() {
+		return this.bishopImage;
+	}
+	
+	//Método polimorfico para instanciar a imagem ao objeto;
+	@Override
+	public void createImage() {
+		if(this.isWhite()==true) {
+			this.bishopImage = new ImageIcon("/home/kokubum/Eclipse/ChessProject/src/PieceImages/BishopPieceWhite.png");
+		}
+		else {
+			this.bishopImage = new ImageIcon("/home/kokubum/Eclipse/ChessProject/src/PieceImages/BishopPieceBlack.png");
+		}
+			
 	}
 	
 	@Override
@@ -75,6 +97,7 @@ public class BishopP extends Piece {
 			System.out.println("X-> "+aux.getX()+" Y-> "+aux.getY());
 		}
 	}
-	
+
+
 
 }
