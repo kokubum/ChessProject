@@ -24,10 +24,10 @@ public class BishopP extends Piece {
 	@Override
 	public void createImage() {
 		if(this.isWhite()==true) {
-			this.bishopImage = new ImageIcon("/home/kokubum/Eclipse/ChessProject/src/PieceImages/BishopPieceWhite.png");
+			this.bishopImage = new ImageIcon("src/PieceImages/BishopPieceWhite.png");
 		}
 		else {
-			this.bishopImage = new ImageIcon("/home/kokubum/Eclipse/ChessProject/src/PieceImages/BishopPieceBlack.png");
+			this.bishopImage = new ImageIcon("src/PieceImages/BishopPieceBlack.png");
 		}
 			
 	}

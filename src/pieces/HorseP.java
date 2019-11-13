@@ -25,10 +25,10 @@ public class HorseP extends Piece {
 	@Override
 	public void createImage() {
 		if(this.isWhite()==true) {
-			this.horseImage = new ImageIcon("/home/kokubum/Eclipse/ChessProject/src/PieceImages/HorsePieceWhite.png");
+			this.horseImage = new ImageIcon("src/PieceImages/HorsePieceWhite.png");
 		}
 		else {
-			this.horseImage = new ImageIcon("/home/kokubum/Eclipse/ChessProject/src/PieceImages/HorsePieceBlack.png");
+			this.horseImage = new ImageIcon("src/PieceImages/HorsePieceBlack.png");
 		}
 			
 	}

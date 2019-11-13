@@ -25,6 +25,7 @@ public class Game {
 		this.boardGame = new BoardGame();
 		++gameNumber; //A cada jogo criado seu número irá ser modificado
 		this.level = level;
+		this.chronometer = new Chronometer(this.level);
 		this.myTurn();
 	}
 	
