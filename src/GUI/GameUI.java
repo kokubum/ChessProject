@@ -142,16 +142,25 @@ public class GameUI extends JFrame {
 		}
 	}
 	
+	
+	
 	//Método para movimentar uma peça no tabuleiro de botões
 	public boolean changeTheIcons(int row,int colum,Piece piece) {
 		//Guarda a posição que ele quer se mover
 		Position afterPos = new Position(row,colum);
 		//Guardo a posiçao em que a peça primeiramente se encontra
 		Position beforePos = new Position(piece.getPosition().getX(),piece.getPosition().getY());
-		//Salvo a imagem referente a peça que iremos mover
-		ImageIcon resizeImage = this.boardUI.resizeImage(piece.getImageIcon());
 		//Se for possivel mover a peça referenciada então...
 		if(this.game.movePiece(afterPos, piece, this.game.getPlayerTurn()) == true) {
+			//Se a peça que for se mover for um peão, e a posição que ele vai é uma das pontas, entao sua posição agora instancia uma rainha
+			if(piece instanceof PawnP && afterPos.getX()%7==0) {
+				PawnP pawn = (PawnP)piece;
+				this.game.turnQueen(pawn);
+				//Faço a peça fazer referencia a nova instancia criada em sua posição que agora será uma new QueenP()
+				piece = this.game.getBoardGame().getBoardMatrix()[afterPos.getX()][afterPos.getY()];
+			}
+			//Salvo a imagem referente a peça que iremos mover (que caso entre no if anterior, então será uma nova instânia de rainha)
+			ImageIcon resizeImage = this.boardUI.resizeImage(piece.getImageIcon());
 			//Atribuimos a imagem salvo ao novo botao que contem a posição para onde o usuário quis movimentar
 			this.boardUI.getBoard()[afterPos.getX()][afterPos.getY()].setIcon(resizeImage);
 			//Seto a imagem do botão que iria se mover como null, para sumir a imagem da peça
