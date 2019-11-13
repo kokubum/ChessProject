@@ -2,15 +2,38 @@ package pieces;
 
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import game.enums.TypePiece;
 
 public class PawnP extends Piece {
 	private boolean firstMove;
+	private ImageIcon pawnImage;
 	
 	public PawnP(boolean isWhite, Position position) {
 		super(TypePiece.PAWN, position,isWhite);
 		this.firstMove = true;
+		this.createImage(); //Método para criar a imagem relacionada a peça, instanciando o caminho da imagem .png
 	}
+	
+	//Método polimórfico para pegar a imagem
+	@Override
+	public ImageIcon getImageIcon() {
+		return this.pawnImage;
+	}
+
+	//Método polimorfico para instanciar a imagem ao objeto;
+	@Override
+	public void createImage() {
+		if(this.isWhite()==true) {
+			this.pawnImage = new ImageIcon("/home/kokubum/Eclipse/ChessProject/src/PieceImages/PawnPieceWhite.png");
+		}
+		else {
+			this.pawnImage = new ImageIcon("/home/kokubum/Eclipse/ChessProject/src/PieceImages/PawnPieceBlack.png");
+		}
+		
+	}
+	
 	
 	/* Coloquei no array dos movimentos possiveis as movimentaçoes em diagonais do peão pois não da pra passar aqui o tabuleiro do jogo,
 	 * logo achei melhor a gente checar a presenca de uma peça em outro metodo aqui ou no BoardGame (que so será usado pro peão), e ai
@@ -72,7 +95,6 @@ public class PawnP extends Piece {
 	public void setFirstMove(boolean firstMove) {
 		this.firstMove = firstMove;
 	}
-	
 
 	
 

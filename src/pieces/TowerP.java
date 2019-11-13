@@ -2,13 +2,34 @@ package pieces;
 
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import game.enums.TypePiece;
 
 public class TowerP extends Piece {
+	private ImageIcon towerImage;
 	
 	public TowerP(boolean isWhite, Position position) {
 		super(TypePiece.TOWER, position,isWhite);
+		this.createImage();
 		
+	}
+	//Método polimórfico para pegar a imagem
+	@Override
+	public ImageIcon getImageIcon() {
+		return this.towerImage;
+	}
+	
+	//Método polimorfico para instanciar a imagem ao objeto;
+	@Override
+	public void createImage() {
+		if(this.isWhite()==true) {
+			this.towerImage = new ImageIcon("/home/kokubum/Eclipse/ChessProject/src/PieceImages/TowerPieceWhite.png");
+		}
+		else {
+			this.towerImage = new ImageIcon("/home/kokubum/Eclipse/ChessProject/src/PieceImages/TowerPieceBlack.png");
+		}
+				
 	}
 	
 	@Override
@@ -68,7 +89,6 @@ public class TowerP extends Piece {
 			System.out.println("X-> "+aux.getX()+" Y-> "+aux.getY());
 		}
 	}
-
-
+	
 
 }

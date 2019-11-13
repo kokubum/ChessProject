@@ -2,12 +2,33 @@ package pieces;
 
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import game.enums.TypePiece;
 
 public class QueenP extends Piece{
+	private ImageIcon queenImage;
 	
 	public QueenP(boolean isWhite, Position position) {
 		super(TypePiece.QUEEN, position,isWhite);
+		this.createImage();
+	}
+	//Método polimórfico para pegar a imagem
+	@Override
+	public ImageIcon getImageIcon() {
+		return this.queenImage;
+	}
+	
+	//Método polimorfico para instanciar a imagem ao objeto;
+	@Override
+	public void createImage() {
+		if(this.isWhite()==true) {
+			this.queenImage = new ImageIcon("/home/kokubum/Eclipse/ChessProject/src/PieceImages/QueenPieceWhite.png");
+		}
+		else {
+			this.queenImage = new ImageIcon("/home/kokubum/Eclipse/ChessProject/src/PieceImages/QueenPieceBlack.png");
+		}
+			
 	}
 	
 	@Override
@@ -110,6 +131,7 @@ public class QueenP extends Piece{
 			System.out.println("X-> "+aux.getX()+" Y-> "+aux.getY());
 		}
 	}
+
 	
 	
 
