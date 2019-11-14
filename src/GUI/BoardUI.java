@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -26,6 +27,7 @@ public class BoardUI extends JPanel {
 		this.setLayout(new GridLayout(8,8));
 		this.setSize(800, 800);
 		this.setLocation(0,2);
+		this.setBorder(BorderFactory.createBevelBorder(WHEN_FOCUSED));
 		this.addBoard();
 	}
 	

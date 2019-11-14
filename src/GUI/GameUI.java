@@ -1,12 +1,17 @@
 package GUI;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.Timer;
 
 import game.Game;
 import game.enums.GameLevel;
@@ -17,6 +22,8 @@ import pieces.Position;
 public class GameUI extends JFrame {
 
 	private ButtonHandler handler;//Atributo para atuar como actionListener para os botões
+	private JButton startTheGame;
+	private Timer timerBase;
 	private BoardUI boardUI;//Tabuleiro de botões
 	private Game game;//Base de jogo
 	
@@ -26,13 +33,29 @@ public class GameUI extends JFrame {
 		this.game = new Game(nickName1,nickName2,isWhite1,isWhite2,level);
 		this.setTitle("ChessProject - Game");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.getContentPane().setBackground(new Color(177,152,134));
 		this.setLayout(null);
-		this.setSize(1500,835);
+		
+		this.setSize(1300,835);
 		boardUI = new BoardUI(this.game.getBoardGame());
 		this.handler = new ButtonHandler();
 		this.addActionListener(this.handler);
 		
-		this.getContentPane().add(boardUI);	
+		this.startTheGame = new JButton("START");
+		this.startTheGame.setFont(new Font("Arial",Font.BOLD,20));
+		this.startTheGame.setBackground(new Color(133,94,66));
+		this.startTheGame.setBorder(BorderFactory.createRaisedBevelBorder());
+		this.startTheGame.setSize(200, 70);
+		this.startTheGame.setLocation(950,550);
+		this.startTheGame.addActionListener(this.handler);
+		
+		this.timerBase = new Timer(1,this.handler);
+		
+		this.getContentPane().add(this.startTheGame);
+		this.getContentPane().add(this.game.getChronometer());
+		this.getContentPane().add(boardUI);
+		
+	
 		
 	
 	}
@@ -42,73 +65,118 @@ public class GameUI extends JFrame {
 		private boolean firstClick = true;
 		
 		private boolean falseClick;
+		private boolean start = false;
 		private Piece piece=null;
 		
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			falseClick = false;//Atributo criado para auxiliar o click em butões que não queremos utilizar
-			if(firstClick == true) {
-				//Sendo o primeiro clique, eu testo qual botão do tabuleiro recebeu o evento (clique)
-				for(int i=0;i<8 && (firstClick == true && falseClick == false);i++) {
-					for(int j=0;j<8 && (firstClick == true && falseClick == false);j++) {
-						//Checo o botão e posição do botão que ta recebendo o evento
-						if(event.getSource() == GameUI.this.boardUI.getBoard()[i][j]) {
-							//Se a posição que foi clicada, no tabuleiro base, fizer referencia a uma peça, entao...
-							if(GameUI.this.game.getBoardGame().getBoardMatrix()[i][j]!=null) {
-								//Testamos se a peça clicado tem a mesma cor que o jogador da vez
-								if(isSameColor(GameUI.this.game,i,j)) {
-									//Se tiver, eu guardo a peça para ser usada posteriormente
-									piece = GameUI.this.game.getBoardGame().getBoardMatrix()[i][j];
-									//Chamo o método para aparecer o caminho em verde
-									GameUI.this.showColorMoves(i, j);
-									//Seto o first click para falso
-									firstClick = false;
+			if(start == true) {
+				if(firstClick == true) {
+					//Sendo o primeiro clique, eu testo qual botão do tabuleiro recebeu o evento (clique)
+					for(int i=0;i<8 && (firstClick == true && falseClick == false);i++) {
+						for(int j=0;j<8 && (firstClick == true && falseClick == false);j++) {
+							//Checo o botão e posição do botão que ta recebendo o evento
+							if(event.getSource() == GameUI.this.boardUI.getBoard()[i][j]) {
+								//Se a posição que foi clicada, no tabuleiro base, fizer referencia a uma peça, entao...
+								if(GameUI.this.game.getBoardGame().getBoardMatrix()[i][j]!=null) {
+									//Testamos se a peça clicado tem a mesma cor que o jogador da vez
+									if(isSameColor(GameUI.this.game,i,j)) {
+										//Se tiver, eu guardo a peça para ser usada posteriormente
+										piece = GameUI.this.game.getBoardGame().getBoardMatrix()[i][j];
+										//Chamo o método para aparecer o caminho em verde
+										GameUI.this.showColorMoves(i, j);
+										//Seto o first click para falso
+										firstClick = false;
+									}
+									else {
+										//Se o jogador da vez clicar em uma peça de uma cor diferente, entao é um falso click
+										falseClick = true;
+									}
+								
 								}
 								else {
-									//Se o jogador da vez clicar em uma peça de uma cor diferente, entao é um falso click
+									//Se o jogador clicar em uma posição vazia, tambem é um falso click
 									falseClick = true;
 								}
-								
-							}
-							else {
-								//Se o jogador clicar em uma posição vazia, tambem é um falso click
-								falseClick = true;
-							}
 							
+							}
 						}
 					}
 				}
+				else {
+					//Usuario ja clicou e ja tem um caminho possivel para usar
+					for(int i=0;i<8 && (firstClick == false && falseClick == false);i++) {
+						for(int j=0;j<8 && (firstClick == false && falseClick == false);j++) {
+							//Checamos então qual posicao ele clicou dessa vez
+							if(event.getSource() == GameUI.this.boardUI.getBoard()[i][j]) {	
+								//Independente de onde ele clicou, o tabuleiro volta a sua cor normal
+								GameUI.this.boardUI.setColorBoard();
+								//Se for uma posição válida, ou for uma posição invalida(sem peça)
+								if(GameUI.this.changeTheIcons(i,j,piece)==true || GameUI.this.game.getBoardGame().getBoardMatrix()[i][j]==null) {
+									firstClick = true;
+									//FirstClick volta a ser true, pois ele tera que escolher a peça novamente, e tambem para sair do for
+								
+								}
+								//Se ele clicou em outra peça do seu proprio time com intuito de não mover a anterior e sim a peça agora escolhida, entao...
+								else if(isSameColor(GameUI.this.game,i,j)){
+									//Recebo essa nova peça como uma nova referencia
+									piece = GameUI.this.game.getBoardGame().getBoardMatrix()[i][j];
+									//Mostro o novo caminho possivel
+									GameUI.this.showColorMoves(i, j);
+									//Seto falseClick como true para sair do for
+									falseClick = true;
+								}
+							
+							}
+						}
+					}
+				
+				}
+				//A cada milisegundo eu testo se o jlabel do cronometro atingiu seu limite
+				//Não posso só setar para zero e mudar o jogador, pois quando o cronometro é setado para zero
+				//em outra situação, o jogador acaba nao mudando, e dando problemas
+				if(event.getSource() instanceof Timer) {
+					if(GameUI.this.game.getLevel() == GameLevel.ADVANCED) {
+						if(GameUI.this.game.getChronometer().getLabelTimer().getText().equals("00 : 29 : 999")) {
+							GameUI.this.game.changeTurn(GameUI.this.game.getPlayerTurn());
+						}
+					}
+					else {
+						if(GameUI.this.game.getLevel() == GameLevel.INTERMEDIATE) {
+							if(GameUI.this.game.getChronometer().getLabelTimer().getText().equals("00 : 59 : 999")) {
+							
+							}
+						}
+						else {
+							if(GameUI.this.game.getChronometer().getLabelTimer().getText().equals("01 : 59 : 999")) {
+								
+							}
+						}
+					}
+				}
+			
 			}
 			else {
-				//Usuario ja clicou e ja tem um caminho possivel para usar
-				for(int i=0;i<8 && (firstClick == false && falseClick == false);i++) {
-					for(int j=0;j<8 && (firstClick == false && falseClick == false);j++) {
-						//Checamos então qual posicao ele clicou dessa vez
-						if(event.getSource() == GameUI.this.boardUI.getBoard()[i][j]) {	
-							//Independente de onde ele clicou, o tabuleiro volta a sua cor normal
-							GameUI.this.boardUI.setColorBoard();
-							//Se for uma posição válida, ou for uma posição invalida(sem peça)
-							if(GameUI.this.changeTheIcons(i,j,piece)==true || GameUI.this.game.getBoardGame().getBoardMatrix()[i][j]==null) {
-								firstClick = true;
-								//FirstClick volta a ser true, pois ele tera que escolher a peça novamente, e tambem para sair do for
-								
-							}
-							//Se ele clicou em outra peça do seu proprio time com intuito de não mover a anterior e sim a peça agora escolhida, entao...
-							else if(isSameColor(GameUI.this.game,i,j)){
-								//Recebo essa nova peça como uma nova referencia
-								piece = GameUI.this.game.getBoardGame().getBoardMatrix()[i][j];
-								//Mostro o novo caminho possivel
-								GameUI.this.showColorMoves(i, j);
-								//Seto falseClick como true para sair do for
-								falseClick = true;
-							}
-							
-						}
-					}
+				if(event.getSource() == GameUI.this.startTheGame){
+					this.start = true;
+					GameUI.this.game.getChronometer().getTime().start();
+					GameUI.this.timerBase.start();
+					
 				}
-				
 			}
 		}
+		
+		
+	}
+	
+	//Método para reiniciar o cronometro
+	
+	public void restartChronometer() {
+		this.game.getChronometer().setMiliseconds(0);
+		this.game.getChronometer().setSeconds(0);
+		this.game.getChronometer().setMinutes(0);
+		this.game.getChronometer().getLabelTimer().setText("00 : 00 : 000");
 	}
 	//Checa se o jogador que clicou é do mesmo time da peça que ele clicou
 	/*Esse método foi criado pois, mesmo sabendo que os movimentos iria retornar como null quando jogadores de uma cor tentarem clicar
@@ -166,6 +234,7 @@ public class GameUI extends JFrame {
 			this.boardUI.getBoard()[afterPos.getX()][afterPos.getY()].setIcon(resizeImage);
 			//Seto a imagem do botão que iria se mover como null, para sumir a imagem da peça
 			this.boardUI.getBoard()[beforePos.getX()][beforePos.getY()].setIcon(null);
+			this.restartChronometer();
 			return true;
 		}
 		
@@ -184,7 +253,7 @@ public class GameUI extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-		GameUI game = new GameUI("Erick","Alberto",true,false,GameLevel.BEGINNER);
+		GameUI game = new GameUI("Erick","Alberto",true,false,GameLevel.ADVANCED);
 		game.setVisible(true);
 	}
 	

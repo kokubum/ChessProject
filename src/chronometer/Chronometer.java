@@ -1,28 +1,35 @@
 package chronometer;
 
-import java.awt.FlowLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import game.enums.GameLevel;
 
-public class Chronometer extends JFrame implements ActionListener {
+public class Chronometer extends JPanel implements ActionListener {
 	
 	//Atributos da classe Chronometer
 	private int minutes;
 	private int seconds;
 	private int miliseconds;
+	
 	private JButton startStopButton;
 	private JButton restartButton;
+	
 	private JLabel labelTimer;
+	private JLabel titleTimer;
+	
 	private Timer time;
+	
 	private GameLevel level;
+	//Atributos que irão guardar o limite de minutos e segundos dependendo do nível do jogo passado
 	private int levelMinutes;
 	private int levelSeconds;
 	
@@ -37,11 +44,10 @@ public class Chronometer extends JFrame implements ActionListener {
 		this.levelSeconds = this.setTimeLimitSeconds(level);
 		
 		//Inicializando a tela do cronômetro java Swing
-		this.setTitle("TIME TO PLAY");
-		this.setResizable(false);
-		this.setSize(500,80);
-		this.setLocationRelativeTo(null); //Faz com que a tela seja inicializada no centro da tela
-		this.getContentPane().setLayout(new FlowLayout()); 
+		
+		this.setBackground(new Color(177,152,134));
+		this.setSize(400,120);
+		this.setLocation(850,650);
 		
 		startStopButton = new JButton("Start"); //startStopButton.setText("Start") = mesma função
 		startStopButton.addActionListener(this); //Registrando o botao da classe como "ouvinte"
@@ -52,12 +58,14 @@ public class Chronometer extends JFrame implements ActionListener {
 		time = new Timer(1,this); //Registrando o time como um "ouvinte" a cada 1 milisegundo
 		
 		labelTimer = new JLabel("00 : 00 : 000"); //Inicializando o label
-		labelTimer.setFont(new Font("Serif",Font.PLAIN,40));;
+		labelTimer.setFont(new Font("Arial",Font.BOLD,30));;
+		titleTimer = new JLabel("TIME TO PLAY");
+		titleTimer.setFont(new Font("Arial",Font.BOLD,40));
 		
 		//Adicionando os componentes ao JFrame do cronômetro
-		this.getContentPane().add(labelTimer);
-		this.getContentPane().add(startStopButton);
-		this.getContentPane().add(restartButton);
+		this.add(titleTimer);
+		this.add(labelTimer);
+		
 		
 	}
 	
