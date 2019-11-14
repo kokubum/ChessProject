@@ -320,7 +320,7 @@ public class Game {
 						moves.add(new Position(pos.getX()+1,pos.getY()-1));
 					}
 					//Se em sua diagonal direita inferior tiver uma peça
-					else if (this.boardGame.getBoardMatrix()[pos.getX()+1][pos.getY()+1]!=null) {
+					if (this.boardGame.getBoardMatrix()[pos.getX()+1][pos.getY()+1]!=null) {
 						moves.add(new Position(pos.getX()+1,pos.getY()+1));
 					}
 				}
@@ -364,8 +364,8 @@ public class Game {
 					if(this.boardGame.getBoardMatrix()[pos.getX()-1][pos.getY()-1]!=null) {
 						moves.add(new Position(pos.getX()-1,pos.getY()-1));
 					}
-					//Se em sua diagonal direita inferior tiver uma peça
-					else if (this.boardGame.getBoardMatrix()[pos.getX()-1][pos.getY()+1]!=null) {
+					//Se em sua diagonal direita superior tiver uma peça
+					if (this.boardGame.getBoardMatrix()[pos.getX()-1][pos.getY()+1]!=null) {
 						moves.add(new Position(pos.getX()-1,pos.getY()+1));
 					}
 				}
