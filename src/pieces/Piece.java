@@ -28,8 +28,7 @@ public abstract class Piece {
 	public abstract void createImage();
 	//Método que define os movimentos possiveis da peça
 	public abstract ArrayList<Position> possibleMoves();
-	//Método para checar se determinada posição escolhida pode ser uma possibilidade
-	public abstract boolean isPossible(Position position);
+	
 	
 	//Getters e Setters da classe Piece	
 

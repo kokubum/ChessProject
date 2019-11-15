@@ -44,7 +44,7 @@ public class Chronometer extends JPanel implements ActionListener {
 		
 		
 		this.setSize(400,100);
-		this.setLocation(850,650);
+		this.setLocation(850,660);
 		
 		time = new Timer(1,this); //Registrando o time como um "ouvinte" a cada 1 milisegundo
 		
@@ -135,12 +135,6 @@ public class Chronometer extends JPanel implements ActionListener {
 		}
 	}
 	
-	//Programa Principal
-	public static void main(String[] args) {
-		Chronometer chronometer = new Chronometer(GameLevel.ADVANCED);
-		chronometer.setVisible(true);
-	}
-
 	//Getters e Setters-------------------------------------------------------------------------------
 	
 	public int getLevelMinutes() {

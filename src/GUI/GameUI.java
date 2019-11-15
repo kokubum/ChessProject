@@ -18,11 +18,12 @@ import javax.swing.Timer;
 import game.Game;
 import game.Player;
 import game.enums.GameLevel;
+import game.interf.GameUInterface;
 import pieces.PawnP;
 import pieces.Piece;
 import pieces.Position;
 
-public class GameUI extends JFrame {
+public class GameUI extends JFrame implements GameUInterface {
 
 	private ButtonHandler handler;//Atributo para atuar como actionListener para os botões
 	private JButton startTheGame; //Botão que da inicio ao cronometro e ao jogo
@@ -45,6 +46,7 @@ public class GameUI extends JFrame {
 		
 		this.setTitle("ChessProject - Game");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		
 		this.setLayout(null);
 	
@@ -252,6 +254,7 @@ public class GameUI extends JFrame {
 	 * em peças de outra cor, eu precisava diferenciar o null desse acontecimento para o null de quando o jogador não clicar em uma
 	 * peça, pra poder analisar de uma forma em cada casa, e poder sair do for no momento correto
 	 */
+	@Override
 	public boolean isSameColor(Game game,int row,int colum) {
 		if(game.getPlayerTurn().isWhitePlayer()== game.getBoardGame().getBoardMatrix()[row][colum].isWhite()) {
 			return true;
@@ -260,6 +263,7 @@ public class GameUI extends JFrame {
 	}
 	
 	//Método que recebe o as possiveis movimentações e entao muda a cor dos botões que as representam
+	@Override
 	public void showColorMoves(int row,int colum) {
 		Piece piece = this.game.getBoardGame().getBoardMatrix()[row][colum];
 		ArrayList<Position> moves=null;
@@ -327,6 +331,7 @@ public class GameUI extends JFrame {
 	
 	//Método para mudar o jogador toda vez que uma peça é movida
 	//Recebe como parâmetro o ultimo jogador a realizar o movimento
+	@Override
 	public void changeTurn(Player player) {
 		if(this.game.getPlayer1().equals(player)) {
 			this.game.setPlayerTurn(this.game.getPlayer2());
@@ -339,6 +344,7 @@ public class GameUI extends JFrame {
 	
 	
 	//Método para movimentar uma peça no tabuleiro de botões
+	@Override
 	public boolean changeTheIcons(int row,int colum,Piece piece) {
 		//Guarda a posição que ele quer se mover
 		Position afterPos = new Position(row,colum);

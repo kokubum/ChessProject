@@ -89,10 +89,7 @@ public class BoardUI extends JPanel {
 	}
 	
 	
-	public static void main(String[] args) {
-		
-	}
-	
+
 	//Getter e Setter
 	public JButton[][] getBoard(){
 		return this.board;

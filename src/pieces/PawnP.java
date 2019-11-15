@@ -72,21 +72,6 @@ public class PawnP extends Piece {
 		return moves;
 	}
 
-	@Override
-	public boolean isPossible(Position position) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	public static void main(String[] args) {
-		Position position = new Position(1,4);
-		PawnP piece = new PawnP(true,position);
-		piece.setMoves(piece.possibleMoves());
-
-		for(Position aux:piece.getMoves()) {
-			System.out.println("X-> "+aux.getX()+" Y-> "+aux.getY());
-		}
-	}
 
 	public boolean isFirstMove() {
 		return firstMove;

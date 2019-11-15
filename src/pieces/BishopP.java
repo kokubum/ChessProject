@@ -82,21 +82,7 @@ public class BishopP extends Piece {
 		return moves;
 	}
 
-	@Override
-	public boolean isPossible(Position position) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	public static void main(String[] args) {
-		Position position = new Position(1,4);
-		BishopP piece = new BishopP(true,position);
-		piece.setMoves(piece.possibleMoves());
 
-		for(Position aux:piece.getMoves()) {
-			System.out.println("X-> "+aux.getX()+" Y-> "+aux.getY());
-		}
-	}
 
 
 
