@@ -42,7 +42,7 @@ public class Chronometer extends JPanel implements ActionListener {
 		
 		//Inicializando a tela do cronômetro java Swing
 		
-		this.setBackground(new Color(177,152,134));
+		
 		this.setSize(400,100);
 		this.setLocation(850,650);
 		

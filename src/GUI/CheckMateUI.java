@@ -21,6 +21,7 @@ public class CheckMateUI extends JFrame {
 	private JLabel labelImage;
 	private JButton rematch;
 	private JButton newGame;
+	private JButton exit;
 	private JLabel winner;
 	
 	private ButtonHandler handler;
@@ -41,25 +42,32 @@ public class CheckMateUI extends JFrame {
 		this.labelImage.setIcon(this.background);
 		
 		this.rematch = new JButton("Rematch");
-		this.rematch.setSize(150, 50);
-		this.rematch.setLocation(270, 100);
+		this.rematch.setSize(150, 40);
+		this.rematch.setLocation(270, 70);
 		this.rematch.setBorder(BorderFactory.createRaisedBevelBorder());
 		this.rematch.setBackground(Color.LIGHT_GRAY);
 		this.rematch.addActionListener(this.handler);
 		
 		this.newGame = new JButton("New Game");
-		this.newGame.setSize(150, 50);
-		this.newGame.setLocation(270, 30);
+		this.newGame.setSize(150, 40);
+		this.newGame.setLocation(270, 15);
 		this.newGame.setBorder(BorderFactory.createRaisedBevelBorder());
 		this.newGame.setBackground(Color.LIGHT_GRAY);
 		this.newGame.addActionListener(this.handler);
+		
+		this.exit = new JButton("Exit Game");
+		this.exit.setSize(150, 40);
+		this.exit.setLocation(270,125);
+		this.exit.setBorder(BorderFactory.createRaisedBevelBorder());
+		this.exit.setBackground(Color.LIGHT_GRAY);
+		this.exit.addActionListener(this.handler);
 		
 		this.winner = new JLabel("WINNER: " + this.winnerName(gameUI.getGame()));
 		this.winner.setSize(150,50);
 		this.winner.setLocation(280, 170);
 		this.winner.setFont(new Font("Arial",Font.BOLD,15));
 		
-		
+		this.getContentPane().add(this.exit);
 		this.getContentPane().add(this.winner);
 		this.getContentPane().add(this.newGame);
 		this.getContentPane().add(this.rematch);
@@ -84,9 +92,12 @@ public class CheckMateUI extends JFrame {
 				CheckMateUI.this.gameUI.setVisible(true);
 				
 			}
-			else {
+			else if(event.getSource() == CheckMateUI.this.newGame) {
 				InitialScreenUI.main(null);
 				
+			}
+			else {
+				System.exit(0);
 			}
 			
 		}

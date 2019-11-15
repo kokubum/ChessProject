@@ -27,6 +27,7 @@ public class GameUI extends JFrame {
 	private ButtonHandler handler;//Atributo para atuar como actionListener para os botões
 	private JButton startTheGame; //Botão que da inicio ao cronometro e ao jogo
 	private JLabel playerTurn; //Label que vai dizer de quem é a vez
+	private JLabel numberOfGame;//Label para indicar qual a numeraçao do jogo
 	private JTextArea movesMade; //Text Area que irá imprimir cada movimento feito
 	private JTextArea checkArea; //Text area pra indicar check e checkmate
 	private JScrollPane scrollTextArea; //Scroll para o JTextArea acima
@@ -44,7 +45,7 @@ public class GameUI extends JFrame {
 		
 		this.setTitle("ChessProject - Game");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.getContentPane().setBackground(new Color(177,152,134));
+		
 		this.setLayout(null);
 	
 		
@@ -66,6 +67,11 @@ public class GameUI extends JFrame {
 		this.playerTurn.setSize(200,70);
 		this.playerTurn.setLocation(975,740);
 		this.playerTurn.setFont(new Font("Arial",Font.BOLD,17));
+		
+		this.numberOfGame = new JLabel("Game of Number: "+Game.getGameNumber());
+		this.numberOfGame.setSize(200, 70);
+		this.numberOfGame.setLocation(955,600);
+		this.numberOfGame.setFont(new Font("Arial",Font.BOLD,17));
 		
 		this.movesMade = new JTextArea();
 		this.movesMade.setBackground(Color.white);
@@ -90,6 +96,7 @@ public class GameUI extends JFrame {
 		this.scrollCheckArea.setLocation(900, 30);
 		
 		this.timerBase = new Timer(1,this.handler);
+		this.getContentPane().add(this.numberOfGame);
 		this.getContentPane().add(this.scrollCheckArea);
 		this.getContentPane().add(this.scrollTextArea);
 		this.getContentPane().add(this.startTheGame);
@@ -196,14 +203,19 @@ public class GameUI extends JFrame {
 						}
 					}
 				}
+				if(event.getSource() == GameUI.this.startTheGame) {
+					GameUI.this.game.setGameOver(true);
+					GameUI.this.winnerByAbandonment();
+					GameUI.this.gameOver();
+				}
 			
 			}
 			else {
-				if(event.getSource() == GameUI.this.startTheGame){
+				if(event.getSource() == GameUI.this.startTheGame){				
+					GameUI.this.startTheGame.setText("GIVE UP");
 					this.start = true;
 					GameUI.this.game.getChronometer().getTime().start();
-					GameUI.this.timerBase.start();
-					
+					GameUI.this.timerBase.start();			
 				}
 			}
 		}
@@ -211,7 +223,13 @@ public class GameUI extends JFrame {
 		
 	}
 	
-	//Método para checar se houve check matet e abre a tela
+	//Método para determinar o ganhador quando houver desisitência
+	public void winnerByAbandonment() {
+		this.changeTurn(this.game.getPlayerTurn());
+		this.game.getPlayerTurn().setWinner(true);
+	}
+	
+	//Método para checar se houve check mate e abre a tela
 	public void gameOver() {
 		if(this.game.isGameOver() == true) {
 			this.game.getChronometer().getTime().stop();

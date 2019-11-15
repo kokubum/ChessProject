@@ -440,19 +440,6 @@ public class Game {
 		}
 	}
 	
-	//Método que verifica se o jogo acabou atraves do atributo winner de Player
-	public Player gameEnd() {
-		if(this.player1.isWinner()) {
-			return this.player1;
-		}
-		if(this.player2.isWinner()){
-			return this.player2;
-		}
-		else {
-			//nenhum jogador ainda deu check mate
-			return null;
-		}
-	}
 	
 	public static void main(String[] args) {
 		

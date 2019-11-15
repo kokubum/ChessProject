@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import game.Game;
 import game.enums.GameLevel;
 
 import javax.swing.JRadioButton;
@@ -175,6 +176,7 @@ public class InitialScreenUI {
 				}
 			
 				if(open == true) {
+					Game.setGameNumber(0);
 					GameUI gameWindow = new GameUI(nickName1, nickName2, isWhite1, isWhite2, level);
 					gameWindow.setVisible(true);
 					frmChessproject.dispose();
