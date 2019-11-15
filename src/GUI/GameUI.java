@@ -41,6 +41,7 @@ public class GameUI extends JFrame {
 	//Construtor para abrir a tela principal do jogo
 	public GameUI(String nickName1, String nickName2, boolean isWhite1, boolean isWhite2, GameLevel level) {
 		this.game = new Game(nickName1,nickName2,isWhite1,isWhite2,level);
+		
 		this.setTitle("ChessProject - Game");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setBackground(new Color(177,152,134));
@@ -178,18 +179,18 @@ public class GameUI extends JFrame {
 				//em outra situação, o jogador acaba nao mudando, e dando problemas
 				if(event.getSource() instanceof Timer) {
 					if(GameUI.this.game.getLevel() == GameLevel.ADVANCED) {
-						if(GameUI.this.game.getChronometer().getLabelTimer().getText().equals("00 : 29 : 999")) {
+						if(GameUI.this.game.getChronometer().getLabelTimer().getText().equals("00 : 14 : 999")) {
 							GameUI.this.changeTurn(GameUI.this.game.getPlayerTurn());
 						}
 					}
 					else {
 						if(GameUI.this.game.getLevel() == GameLevel.INTERMEDIATE) {
-							if(GameUI.this.game.getChronometer().getLabelTimer().getText().equals("00 : 59 : 999")) {
+							if(GameUI.this.game.getChronometer().getLabelTimer().getText().equals("00 : 29 : 999")) {
 								GameUI.this.changeTurn(GameUI.this.game.getPlayerTurn());
 							}
 						}
 						else {
-							if(GameUI.this.game.getChronometer().getLabelTimer().getText().equals("01 : 59 : 999")) {
+							if(GameUI.this.game.getChronometer().getLabelTimer().getText().equals("00 : 59 : 999")) {
 								GameUI.this.changeTurn(GameUI.this.game.getPlayerTurn());
 							}
 						}

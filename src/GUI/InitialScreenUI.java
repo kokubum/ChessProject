@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import game.enums.GameLevel;
@@ -25,6 +26,7 @@ public class InitialScreenUI {
 
 	
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -47,6 +49,7 @@ public class InitialScreenUI {
 		frmChessproject = new JFrame();
 		frmChessproject.setTitle("ChessProject");
 		frmChessproject.setBounds(100, 0, 1200, 700);
+		frmChessproject.setLocationRelativeTo(null);
 		frmChessproject.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmChessproject.getContentPane().setLayout(null);
 		
@@ -143,30 +146,44 @@ public class InitialScreenUI {
 				//Começar jogo
 				String nickName1, nickName2;
 				boolean isWhite1, isWhite2;
-				//Caso o usuario n escolha a difuldade, a mesma será fácil
-				GameLevel level = GameLevel.BEGINNER;
+				boolean open = false;
+				GameLevel level = null;
 				
 				//Pegando nome dos jogadores nos FieldText
-				nickName1 = textFieldPlayer1.getName();
-				nickName2 = textFieldPlayer2.getName();
+				nickName1 = textFieldPlayer1.getText();
+				nickName2 = textFieldPlayer2.getText();
 				
 				//Pegando valores boolean dos RadioButton
 				isWhite1 = rdbtnWhiteTeamPlayer1.isSelected();
 				isWhite2 = rdbtnWhiteTeamPlayer2.isSelected();
 				
-				if(rdbtnBeginner.isSelected()) {
-					level = GameLevel.BEGINNER;
+				if(!nickName1.equals("") && !nickName2.equals("")) {
+					if(isWhite1 == true || isWhite2 == true) {
+						if(rdbtnBeginner.isSelected()) {
+							level = GameLevel.BEGINNER;
+							open = true;
+						}
+						else if(rdbtnIntermediate.isSelected()) {
+							level = GameLevel.INTERMEDIATE;
+							open = true;
+						}
+						else if(rdbtnAdvanced.isSelected()) {
+							level = GameLevel.ADVANCED;
+							open = true;
+						}
+					}
 				}
-				else if(rdbtnIntermediate.isSelected()) {
-					level = GameLevel.INTERMEDIATE;
+			
+				if(open == true) {
+					GameUI gameWindow = new GameUI(nickName1, nickName2, isWhite1, isWhite2, level);
+					gameWindow.setVisible(true);
+					frmChessproject.dispose();
 				}
-				else if(rdbtnAdvanced.isSelected()) {
-					level = GameLevel.ADVANCED;
+				else {
+					JOptionPane.showMessageDialog(InitialScreenUI.this.frmChessproject,"Missing Information!!","ERROR 404",JOptionPane.INFORMATION_MESSAGE);
 				}
 				
-				GameUI gameWindow = new GameUI(nickName1, nickName2, isWhite1, isWhite2, level);
-				gameWindow.setVisible(true);
-				frmChessproject.dispose();
+				
 			}
 		});
 		

@@ -115,9 +115,6 @@ public class Chronometer extends JPanel implements ActionListener {
 	//Método para definir o limite de tempo (minutos) a depender do nivel escolhido pelo usuário
 	public int setTimeLimitMinutes(GameLevel level) {
 		if(level.equals(GameLevel.BEGINNER)) {
-			return 2;
-		}
-		else if(level.equals(GameLevel.INTERMEDIATE)) {
 			return 1;
 		}
 		else {
@@ -127,11 +124,14 @@ public class Chronometer extends JPanel implements ActionListener {
 	
 	//Método para definir o limite de tempo (segundos) a depender do nivel escolhido pelo usuário
 	public int setTimeLimitSeconds(GameLevel level) {
-		if(level.equals(GameLevel.BEGINNER) || level.equals(GameLevel.INTERMEDIATE)) {
+		if(level.equals(GameLevel.BEGINNER)) {
 			return 60;
 		}
-		else {
+		else if(level.equals(GameLevel.INTERMEDIATE)) {
 			return 30;
+		}
+		else {
+			return 15;
 		}
 	}
 	

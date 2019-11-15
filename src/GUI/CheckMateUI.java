@@ -29,7 +29,7 @@ public class CheckMateUI extends JFrame {
 	
 	
 	public CheckMateUI(GameUI gameUI) {
-		this.background = new ImageIcon("src/PieceImages/checkMate.jpg");
+		this.background = new ImageIcon("src/GUIimages/checkMate.jpg");
 		this.setTitle("CHECKMATE");
 		this.setSize(500, 500);
 		this.setLocationRelativeTo(null);
@@ -52,6 +52,7 @@ public class CheckMateUI extends JFrame {
 		this.newGame.setLocation(270, 30);
 		this.newGame.setBorder(BorderFactory.createRaisedBevelBorder());
 		this.newGame.setBackground(Color.LIGHT_GRAY);
+		this.newGame.addActionListener(this.handler);
 		
 		this.winner = new JLabel("WINNER: " + this.winnerName(gameUI.getGame()));
 		this.winner.setSize(150,50);
@@ -67,6 +68,11 @@ public class CheckMateUI extends JFrame {
 		
 	}
 	private class ButtonHandler implements ActionListener{
+		private String nickName1 = CheckMateUI.this.gameUI.getGame().getPlayer1().getNickName();
+		private String nickName2 = CheckMateUI.this.gameUI.getGame().getPlayer2().getNickName();
+		private boolean isWhitePlayer1= CheckMateUI.this.gameUI.getGame().getPlayer1().isWhitePlayer();
+		private boolean isWhitePlayer2 = CheckMateUI.this.gameUI.getGame().getPlayer2().isWhitePlayer();
+		private GameLevel level = CheckMateUI.this.gameUI.getGame().getLevel();
 		
 		@Override
 		public void actionPerformed(ActionEvent event) {
@@ -74,11 +80,12 @@ public class CheckMateUI extends JFrame {
 			CheckMateUI.this.gameUI.dispose();
 			if(event.getSource() == CheckMateUI.this.rematch) {
 				
-				GameUI.main(null);
+				CheckMateUI.this.gameUI = new GameUI(nickName1,nickName2,isWhitePlayer1,isWhitePlayer2,level);
+				CheckMateUI.this.gameUI.setVisible(true);
 				
 			}
 			else {
-				//Se entrar aqui eu vou chamar o main da tela inicial
+				InitialScreenUI.main(null);
 				
 			}
 			
