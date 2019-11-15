@@ -80,16 +80,7 @@ public class Game {
 		
 	}
 	
-	//Método para mudar o jogador toda vez que uma peça é movida
-	//Recebe como parâmetro o ultimo jogador a realizar o movimento
-	public void changeTurn(Player player) {
-		if(this.player1.equals(player)) {
-			this.setPlayerTurn(player2);
-		}
-		else {
-			this.setPlayerTurn(player1);
-		}
-	}
+	
 	
 	//Método para movimentar uma peça
 	public boolean movePiece(Position position,Piece piece,Player player) {
@@ -132,9 +123,7 @@ public class Game {
 			piece.setPosition(position);
 			//Checo, se depois da jogada, a peça movida vai pôr o rei em Check
 			this.isYourKingInCheck = this.isKingInCheck(piece, player);
-			
-			//Mudo a  vez do jogador
-			this.changeTurn(player); 
+			 
 		}
 		else {
 			//Usuario clicou em um lugar que não é possivel mover

@@ -6,14 +6,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.Timer;
 
 import game.Game;
+import game.Player;
 import game.enums.GameLevel;
 import pieces.PawnP;
 import pieces.Piece;
@@ -22,8 +25,11 @@ import pieces.Position;
 public class GameUI extends JFrame {
 
 	private ButtonHandler handler;//Atributo para atuar como actionListener para os botões
-	private JButton startTheGame;
-	private Timer timerBase;
+	private JButton startTheGame; //Botão que da inicio ao cronometro e ao jogo
+	private JLabel playerTurn; //Label que vai dizer de quem é a vez
+	private JTextArea movesMade; //Text Area que irá imprimir cada movimento feito
+	private JScrollPane scrollTextArea; //Scroll para o JTextArea acima
+	private Timer timerBase;  //Método criado aqui para poder adicionar o action listener ao Timer daqui, e assim ter acesso ao cronometro em funcionamento
 	private BoardUI boardUI;//Tabuleiro de botões
 	private Game game;//Base de jogo
 	
@@ -49,13 +55,30 @@ public class GameUI extends JFrame {
 		this.startTheGame.setLocation(950,550);
 		this.startTheGame.addActionListener(this.handler);
 		
+		this.playerTurn = new JLabel("PLAYER: "+this.game.getPlayerTurn().getNickName());
+		this.playerTurn.setSize(200,70);
+		this.playerTurn.setLocation(975,740);
+		this.playerTurn.setFont(new Font("Arial",Font.BOLD,17));
+		
+		this.movesMade = new JTextArea();
+		this.movesMade.setBackground(Color.white);
+		this.movesMade.setBorder(BorderFactory.createLoweredBevelBorder());
+		this.movesMade.setText("----------------MOVES-----------------");
+		this.movesMade.setFont(new Font("Arial",Font.PLAIN,19));
+		this.movesMade.setEditable(false);
+		
+		this.scrollTextArea = new JScrollPane(this.movesMade, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		this.scrollTextArea.setSize(300, 350);
+		this.scrollTextArea.setLocation(900, 170);
+		
 		this.timerBase = new Timer(1,this.handler);
 		
+		this.getContentPane().add(this.scrollTextArea);
 		this.getContentPane().add(this.startTheGame);
 		this.getContentPane().add(this.game.getChronometer());
-		this.getContentPane().add(boardUI);
-		
-	
+		this.getContentPane().add(this.playerTurn);
+		this.getContentPane().add(this.boardUI);
+
 		
 	
 	}
@@ -139,18 +162,18 @@ public class GameUI extends JFrame {
 				if(event.getSource() instanceof Timer) {
 					if(GameUI.this.game.getLevel() == GameLevel.ADVANCED) {
 						if(GameUI.this.game.getChronometer().getLabelTimer().getText().equals("00 : 29 : 999")) {
-							GameUI.this.game.changeTurn(GameUI.this.game.getPlayerTurn());
+							GameUI.this.changeTurn(GameUI.this.game.getPlayerTurn());
 						}
 					}
 					else {
 						if(GameUI.this.game.getLevel() == GameLevel.INTERMEDIATE) {
 							if(GameUI.this.game.getChronometer().getLabelTimer().getText().equals("00 : 59 : 999")) {
-							
+								GameUI.this.changeTurn(GameUI.this.game.getPlayerTurn());
 							}
 						}
 						else {
 							if(GameUI.this.game.getChronometer().getLabelTimer().getText().equals("01 : 59 : 999")) {
-								
+								GameUI.this.changeTurn(GameUI.this.game.getPlayerTurn());
 							}
 						}
 					}
@@ -210,7 +233,48 @@ public class GameUI extends JFrame {
 			this.boardUI.getBoard()[position.getX()][position.getY()].setBackground(new Color(144,238,144));
 		}
 	}
+	//Método para adicionar um movimento na JTextArea
+	public void writeMovement(Position before,Position after,Piece piece) {
+		String color;
+		if(piece.isWhite() == true) {
+			color = "White";
+		}
+		else {
+			color = "Black";
+		}
+		this.movesMade.setText(this.movesMade.getText()+
+													"\n\n" +
+													this.realPosition(before)+
+													" -> " +
+													this.realPosition(after)+
+													" ("+color+" "+piece.getTypePiece() + ")");
+	}
 	
+	
+	//Método para transformar uma posição da matriz do tabuleiro, em uma posição do xadrez
+	public String realPosition(Position position) {
+		//Para cada coluna associa uma letra (a=0,b=1,c=2...)
+		char colum = (char)(position.getY()+'a');
+		//Transformo esse char para String
+		String pos = String.valueOf(colum);
+		//Pego a linha correspondente, se for 0 = 8, 1 = 7 ...
+		//Concateno com a string anterior
+		pos = pos.concat(String.valueOf(8-position.getX()));
+		
+		return pos;
+	}
+	
+	//Método para mudar o jogador toda vez que uma peça é movida
+	//Recebe como parâmetro o ultimo jogador a realizar o movimento
+	public void changeTurn(Player player) {
+		if(this.game.getPlayer1().equals(player)) {
+			this.game.setPlayerTurn(this.game.getPlayer2());
+		}
+		else {
+			this.game.setPlayerTurn(this.game.getPlayer1());
+		}
+		this.playerTurn.setText("PLAYER: "+ this.game.getPlayerTurn().getNickName());
+	}
 	
 	
 	//Método para movimentar uma peça no tabuleiro de botões
@@ -234,6 +298,8 @@ public class GameUI extends JFrame {
 			this.boardUI.getBoard()[afterPos.getX()][afterPos.getY()].setIcon(resizeImage);
 			//Seto a imagem do botão que iria se mover como null, para sumir a imagem da peça
 			this.boardUI.getBoard()[beforePos.getX()][beforePos.getY()].setIcon(null);
+			this.changeTurn(this.game.getPlayerTurn());
+			this.writeMovement(beforePos, afterPos,piece);
 			this.restartChronometer();
 			return true;
 		}
@@ -255,6 +321,10 @@ public class GameUI extends JFrame {
 	public static void main(String[] args) {
 		GameUI game = new GameUI("Erick","Alberto",true,false,GameLevel.ADVANCED);
 		game.setVisible(true);
+		
+		Position position = new Position(0,0);
+		System.out.println(game.realPosition(position));
+	
 	}
 	
 

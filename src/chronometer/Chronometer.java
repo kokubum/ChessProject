@@ -20,9 +20,6 @@ public class Chronometer extends JPanel implements ActionListener {
 	private int seconds;
 	private int miliseconds;
 	
-	private JButton startStopButton;
-	private JButton restartButton;
-	
 	private JLabel labelTimer;
 	private JLabel titleTimer;
 	
@@ -46,14 +43,8 @@ public class Chronometer extends JPanel implements ActionListener {
 		//Inicializando a tela do cronômetro java Swing
 		
 		this.setBackground(new Color(177,152,134));
-		this.setSize(400,120);
+		this.setSize(400,100);
 		this.setLocation(850,650);
-		
-		startStopButton = new JButton("Start"); //startStopButton.setText("Start") = mesma função
-		startStopButton.addActionListener(this); //Registrando o botao da classe como "ouvinte"
-		
-		restartButton = new JButton("Restart");//restartButton.setText("Restart") = mesma função
-		restartButton.addActionListener(this);//Registrando o botão como um "ouvinte"
 		
 		time = new Timer(1,this); //Registrando o time como um "ouvinte" a cada 1 milisegundo
 		
@@ -116,23 +107,6 @@ public class Chronometer extends JPanel implements ActionListener {
 					this.getLabelTimer().setText("0"+this.getMinutes()+" : "+this.getSeconds()+" : "+this.getMiliseconds());
 				}
 			}
-		}
-		else if(event.getSource() == this.getStartStopButton()) {
-			
-			if(this.getStartStopButton().getText().equals("Start")) {
-				this.getTime().start();
-				this.getStartStopButton().setText("Stop");
-			}
-			else {
-				this.getTime().stop();;
-				this.getStartStopButton().setText("Start");
-			}
-		}
-		else {
-			this.setMiliseconds(0);
-			this.setSeconds(0);
-			this.setMinutes(0);
-			this.getLabelTimer().setText("00 : 00 : 000");
 		}
 		
 		
@@ -208,11 +182,6 @@ public class Chronometer extends JPanel implements ActionListener {
 	public void setMiliseconds(int miliseconds) {
 		this.miliseconds = miliseconds;
 	}
-
-	public JButton getStartStopButton() {
-		return startStopButton;
-	}
-
 
 	public Timer getTime() {
 		return time;
