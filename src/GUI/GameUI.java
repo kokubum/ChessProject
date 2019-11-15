@@ -28,10 +28,14 @@ public class GameUI extends JFrame {
 	private JButton startTheGame; //Botão que da inicio ao cronometro e ao jogo
 	private JLabel playerTurn; //Label que vai dizer de quem é a vez
 	private JTextArea movesMade; //Text Area que irá imprimir cada movimento feito
+	private JTextArea checkArea; //Text area pra indicar check e checkmate
 	private JScrollPane scrollTextArea; //Scroll para o JTextArea acima
+	private JScrollPane scrollCheckArea; // Scroll para a área de check
 	private Timer timerBase;  //Método criado aqui para poder adicionar o action listener ao Timer daqui, e assim ter acesso ao cronometro em funcionamento
 	private BoardUI boardUI;//Tabuleiro de botões
 	private Game game;//Base de jogo
+	
+	private CheckMateUI checkMateScreen; //Tela de checkMate
 	
 
 	//Construtor para abrir a tela principal do jogo
@@ -41,8 +45,10 @@ public class GameUI extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setBackground(new Color(177,152,134));
 		this.setLayout(null);
+	
 		
 		this.setSize(1300,835);
+		this.setLocationRelativeTo(null);
 		boardUI = new BoardUI(this.game.getBoardGame());
 		this.handler = new ButtonHandler();
 		this.addActionListener(this.handler);
@@ -63,7 +69,7 @@ public class GameUI extends JFrame {
 		this.movesMade = new JTextArea();
 		this.movesMade.setBackground(Color.white);
 		this.movesMade.setBorder(BorderFactory.createLoweredBevelBorder());
-		this.movesMade.setText("----------------MOVES-----------------");
+		this.movesMade.setText("----------------MOVES-----------------\n");
 		this.movesMade.setFont(new Font("Arial",Font.PLAIN,19));
 		this.movesMade.setEditable(false);
 		
@@ -71,8 +77,19 @@ public class GameUI extends JFrame {
 		this.scrollTextArea.setSize(300, 350);
 		this.scrollTextArea.setLocation(900, 170);
 		
-		this.timerBase = new Timer(1,this.handler);
+		this.checkArea = new JTextArea();
+		this.checkArea.setBackground(Color.white);
+		this.checkArea.setBorder(BorderFactory.createLoweredBevelBorder());
+		this.checkArea.setEditable(false);
+		this.checkArea.setText("-------------CHECK AREA--------------\n");
+		this.checkArea.setFont(new Font("Arial",Font.PLAIN,19));
 		
+		this.scrollCheckArea = new JScrollPane(this.checkArea,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		this.scrollCheckArea.setSize(300,110);
+		this.scrollCheckArea.setLocation(900, 30);
+		
+		this.timerBase = new Timer(1,this.handler);
+		this.getContentPane().add(this.scrollCheckArea);
 		this.getContentPane().add(this.scrollTextArea);
 		this.getContentPane().add(this.startTheGame);
 		this.getContentPane().add(this.game.getChronometer());
@@ -193,6 +210,16 @@ public class GameUI extends JFrame {
 		
 	}
 	
+	//Método para checar se houve check matet e abre a tela
+	public void gameOver() {
+		if(this.game.isGameOver() == true) {
+			this.game.getChronometer().getTime().stop();
+			this.checkMateScreen = new CheckMateUI();
+			this.checkMateScreen.setVisible(true);
+		}
+	}
+
+	
 	//Método para reiniciar o cronometro
 	
 	public void restartChronometer() {
@@ -243,7 +270,7 @@ public class GameUI extends JFrame {
 			color = "Black";
 		}
 		this.movesMade.setText(this.movesMade.getText()+
-													"\n\n" +
+													"\n" +
 													this.realPosition(before)+
 													" -> " +
 													this.realPosition(after)+
@@ -262,6 +289,21 @@ public class GameUI extends JFrame {
 		pos = pos.concat(String.valueOf(8-position.getX()));
 		
 		return pos;
+	}
+	
+	//Método para escrever se o rei esta em check
+	public void writeCheck(Piece piece) {
+		String color;
+		if(piece.isWhite() == true) {
+			color = "Black";
+		}
+		else {
+			color = "White";
+		}
+		if(this.game.getKingInCheck() == true) { 
+			this.checkArea.setText(this.checkArea.getText() + color + " King in Check\n");
+			this.game.setKingInCheck(false);
+		}
 	}
 	
 	//Método para mudar o jogador toda vez que uma peça é movida
@@ -298,14 +340,19 @@ public class GameUI extends JFrame {
 			this.boardUI.getBoard()[afterPos.getX()][afterPos.getY()].setIcon(resizeImage);
 			//Seto a imagem do botão que iria se mover como null, para sumir a imagem da peça
 			this.boardUI.getBoard()[beforePos.getX()][beforePos.getY()].setIcon(null);
+			
 			this.changeTurn(this.game.getPlayerTurn());
 			this.writeMovement(beforePos, afterPos,piece);
+			this.writeCheck(piece);
 			this.restartChronometer();
+			this.gameOver();
 			return true;
 		}
 		
 		return false;
 	}
+	
+	
 	
 	
 
@@ -321,9 +368,6 @@ public class GameUI extends JFrame {
 	public static void main(String[] args) {
 		GameUI game = new GameUI("Erick","Alberto",true,false,GameLevel.ADVANCED);
 		game.setVisible(true);
-		
-		Position position = new Position(0,0);
-		System.out.println(game.realPosition(position));
 	
 	}
 	
