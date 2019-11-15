@@ -214,7 +214,7 @@ public class GameUI extends JFrame {
 	public void gameOver() {
 		if(this.game.isGameOver() == true) {
 			this.game.getChronometer().getTime().stop();
-			this.checkMateScreen = new CheckMateUI();
+			this.checkMateScreen = new CheckMateUI(this);
 			this.checkMateScreen.setVisible(true);
 		}
 	}
@@ -346,6 +346,7 @@ public class GameUI extends JFrame {
 			this.writeCheck(piece);
 			this.restartChronometer();
 			this.gameOver();
+			
 			return true;
 		}
 		
@@ -363,6 +364,11 @@ public class GameUI extends JFrame {
 				this.boardUI.getBoard()[i][j].addActionListener(handler);
 			}
 		}
+	}
+	
+	//Getter do game para o checkMateScreen
+	public Game getGame() {
+		return this.game;
 	}
 	
 	public static void main(String[] args) {
