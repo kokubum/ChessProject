@@ -440,11 +440,6 @@ public class Game {
 		}
 	}
 	
-	
-	public static void main(String[] args) {
-		
-	}
-	
 	//Getter e Setters da classe Game
 
 	public Player getPlayer1() {
