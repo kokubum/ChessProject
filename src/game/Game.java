@@ -18,16 +18,59 @@ public class Game {
 	private GameLevel level; //Nivel de dificuldade do jogo | Intimamente relacionado ao funcionamento do cronômetro
 	private Chronometer chronometer;
 	
+	
+	private boolean isYourKingInCheck;
+	private boolean gameOver;
+	
+	
 	//Construtor do Game vai instanciar todos os seus objetos devido a agregação forte relacionada a ele
 	public Game(String nickPlayer1, String nickPlayer2, boolean whitePlayer1, boolean whitePlayer2, GameLevel level) {
 		this.player1 = new Player(nickPlayer1, whitePlayer1);
 		this.player2 = new Player(nickPlayer2, whitePlayer2);
+		this.isYourKingInCheck = false;
+		this.setGameOver(false);
 		this.boardGame = new BoardGame();
 		++gameNumber; //A cada jogo criado seu número irá ser modificado
 		this.level = level;
 		this.chronometer = new Chronometer(this.level);
 		this.myTurn();
 	}
+	
+	
+	
+	//Método para definir se o Rei está em Check ou não (OBS: Supõe que o jogador não vai botar seu próprio rei em check
+	public boolean isKingInCheck(Piece piece,Player player) {
+		ArrayList<Position>checkingPosition = null; 
+		//Testo se a peça que se moveu é um peão, devido ao overload no método showPossibleMoves()
+		if(piece instanceof PawnP) {
+			if(piece.getPosition().getX()>0 && piece.getPosition().getX() <7) {
+				PawnP pawn = (PawnP)piece;
+				checkingPosition = this.showPossibleMoves(player, pawn);
+			}
+			
+		}
+		else {
+			checkingPosition = this.showPossibleMoves(player, piece);
+		}
+		//Preciso verificar que as movimentações não são nulas (piece não tem como se mover)
+		if(checkingPosition!=null) {
+			for(Position aux:checkingPosition) {
+				//Eu não testo a cor da peça pois no método showPossibleMoves ele ja remove a possibilidade da peça se mover pra uma posição
+				//em que há uma peça da mesma cor que ela
+				if(this.boardGame.getBoardMatrix()[aux.getX()][aux.getY()]!=null) {
+					
+					//Se uma dessas movimentações for a posição que se encontra o King então o jogador está em check
+					if(this.boardGame.getBoardMatrix()[aux.getX()][aux.getY()] instanceof KingP) {	
+						
+						return true;
+					}
+				}
+			}
+		}
+		//Se não, ele não está
+		return false;
+	}
+	
 	
 	//Método para definir de quem vai começar o jogo
 	public void myTurn() {
@@ -41,16 +84,7 @@ public class Game {
 		
 	}
 	
-	//Método para mudar o jogador toda vez que uma peça é movida
-	//Recebe como parâmetro o ultimo jogador a realizar o movimento
-	public void changeTurn(Player player) {
-		if(this.player1.equals(player)) {
-			this.setPlayerTurn(player2);
-		}
-		else {
-			this.setPlayerTurn(player1);
-		}
-	}
+	
 	
 	//Método para movimentar uma peça
 	public boolean movePiece(Position position,Piece piece,Player player) {
@@ -70,9 +104,8 @@ public class Game {
 		
 		for(Position aux:auxiliarMoves) {
 			//Se a posição escolhida estiver na lista de possiveis movimentações, entao isPossible = true
-			if(position.getX()==aux.getX() && position.getY()==aux.getY()) {
+			if(position.equals(aux)) {
 				isPossible=true;
-				
 			}
 		}	
 		if(isPossible) {
@@ -83,6 +116,7 @@ public class Game {
 			if(this.boardGame.getBoardMatrix()[position.getX()][position.getY()]!=null) {
 				if(isCheckMate(position)) {
 					player.setWinner(true);
+					this.gameOver = true;
 					//É preciso criar algum metodo para finalizar o jogo, assim não precisaremos ficar checando todo momento
 				}
 			}
@@ -92,8 +126,9 @@ public class Game {
 			this.boardGame.getBoardMatrix()[piece.getPosition().getX()][piece.getPosition().getY()]=null;
 			//Logo, para finalizar a movimentação setamos a posição da peça para a posição que ela ira se mover	
 			piece.setPosition(position);
-			this.changeTurn(player);
-			
+			//Checo, se depois da jogada, a peça movida vai pôr o rei em Check
+			this.isYourKingInCheck = this.isKingInCheck(piece, player);
+			 
 		}
 		else {
 			//Usuario clicou em um lugar que não é possivel mover
@@ -405,28 +440,9 @@ public class Game {
 		}
 	}
 	
-	//Método que verifica se o jogo acabou atraves do atributo winner de Player
-	public Player gameEnd() {
-		if(this.player1.isWinner()) {
-			return this.player1;
-		}
-		if(this.player2.isWinner()){
-			return this.player2;
-		}
-		else {
-			//nenhum jogador ainda deu check mate
-			return null;
-		}
-	}
 	
 	public static void main(String[] args) {
-		Game game = new Game("Erick","Alberto",true,false,GameLevel.BEGINNER);
-		Piece piece = game.boardGame.getBoardMatrix()[1][2];
-		System.out.println(piece.getTypePiece());
-		System.out.println(game.showPossibleMoves(game.getPlayer1(), piece));
-		for(Position aux:game.showPossibleMoves(game.player1, piece)) {
-			System.out.println("X-> "+aux.getX()+" Y-> "+aux.getY());
-		}
+		
 	}
 	
 	//Getter e Setters da classe Game
@@ -487,5 +503,24 @@ public class Game {
 		this.playerTurn = playerTurn;
 	}
 	
+	public boolean getKingInCheck() {
+		return this.isYourKingInCheck;
+	}
+	
+	public void setKingInCheck(boolean isKingInCheck) {
+		this.isYourKingInCheck = isKingInCheck;
+	}
+
+
+
+	public boolean isGameOver() {
+		return gameOver;
+	}
+
+
+
+	public void setGameOver(boolean gameOver) {
+		this.gameOver = gameOver;
+	}
 	
 }

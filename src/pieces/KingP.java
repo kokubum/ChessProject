@@ -83,22 +83,7 @@ public class KingP extends Piece {
 		
 	}
 	
-	@Override
-	public boolean isPossible(Position position) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	public static void main(String[] args) {
-		Position position = new Position(1,4);
-		KingP piece = new KingP(true,position);
-		piece.setMoves(piece.possibleMoves());
 
-		for(Position aux:piece.getMoves()) {
-			System.out.println("X-> "+aux.getX()+" Y-> "+aux.getY());
-		}
-		
-	}
 
 
 

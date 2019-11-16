@@ -116,21 +116,6 @@ public class QueenP extends Piece{
 		return moves;
 	}
 
-	@Override
-	public boolean isPossible(Position position) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	public static void main(String[] args) {
-		Position position = new Position(0,3);
-		QueenP piece = new QueenP(true,position);
-		piece.setMoves(piece.possibleMoves());
-
-		for(Position aux:piece.getMoves()) {
-			System.out.println("X-> "+aux.getX()+" Y-> "+aux.getY());
-		}
-	}
 
 	
 	

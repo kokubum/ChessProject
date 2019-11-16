@@ -1,28 +1,32 @@
 package chronometer;
 
-import java.awt.FlowLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import game.enums.GameLevel;
 
-public class Chronometer extends JFrame implements ActionListener {
+public class Chronometer extends JPanel implements ActionListener {
 	
 	//Atributos da classe Chronometer
 	private int minutes;
 	private int seconds;
 	private int miliseconds;
-	private JButton startStopButton;
-	private JButton restartButton;
+	
 	private JLabel labelTimer;
+	private JLabel titleTimer;
+	
 	private Timer time;
+	
 	private GameLevel level;
+	//Atributos que irão guardar o limite de minutos e segundos dependendo do nível do jogo passado
 	private int levelMinutes;
 	private int levelSeconds;
 	
@@ -37,27 +41,22 @@ public class Chronometer extends JFrame implements ActionListener {
 		this.levelSeconds = this.setTimeLimitSeconds(level);
 		
 		//Inicializando a tela do cronômetro java Swing
-		this.setTitle("TIME TO PLAY");
-		this.setResizable(false);
-		this.setSize(500,80);
-		this.setLocationRelativeTo(null); //Faz com que a tela seja inicializada no centro da tela
-		this.getContentPane().setLayout(new FlowLayout()); 
 		
-		startStopButton = new JButton("Start"); //startStopButton.setText("Start") = mesma função
-		startStopButton.addActionListener(this); //Registrando o botao da classe como "ouvinte"
 		
-		restartButton = new JButton("Restart");//restartButton.setText("Restart") = mesma função
-		restartButton.addActionListener(this);//Registrando o botão como um "ouvinte"
+		this.setSize(400,100);
+		this.setLocation(850,660);
 		
 		time = new Timer(1,this); //Registrando o time como um "ouvinte" a cada 1 milisegundo
 		
 		labelTimer = new JLabel("00 : 00 : 000"); //Inicializando o label
-		labelTimer.setFont(new Font("Serif",Font.PLAIN,40));;
+		labelTimer.setFont(new Font("Arial",Font.BOLD,30));;
+		titleTimer = new JLabel("TIME TO PLAY");
+		titleTimer.setFont(new Font("Arial",Font.BOLD,40));
 		
 		//Adicionando os componentes ao JFrame do cronômetro
-		this.getContentPane().add(labelTimer);
-		this.getContentPane().add(startStopButton);
-		this.getContentPane().add(restartButton);
+		this.add(titleTimer);
+		this.add(labelTimer);
+		
 		
 	}
 	
@@ -109,23 +108,6 @@ public class Chronometer extends JFrame implements ActionListener {
 				}
 			}
 		}
-		else if(event.getSource() == this.getStartStopButton()) {
-			
-			if(this.getStartStopButton().getText().equals("Start")) {
-				this.getTime().start();
-				this.getStartStopButton().setText("Stop");
-			}
-			else {
-				this.getTime().stop();;
-				this.getStartStopButton().setText("Start");
-			}
-		}
-		else {
-			this.setMiliseconds(0);
-			this.setSeconds(0);
-			this.setMinutes(0);
-			this.getLabelTimer().setText("00 : 00 : 000");
-		}
 		
 		
 	}
@@ -133,9 +115,6 @@ public class Chronometer extends JFrame implements ActionListener {
 	//Método para definir o limite de tempo (minutos) a depender do nivel escolhido pelo usuário
 	public int setTimeLimitMinutes(GameLevel level) {
 		if(level.equals(GameLevel.BEGINNER)) {
-			return 2;
-		}
-		else if(level.equals(GameLevel.INTERMEDIATE)) {
 			return 1;
 		}
 		else {
@@ -145,20 +124,17 @@ public class Chronometer extends JFrame implements ActionListener {
 	
 	//Método para definir o limite de tempo (segundos) a depender do nivel escolhido pelo usuário
 	public int setTimeLimitSeconds(GameLevel level) {
-		if(level.equals(GameLevel.BEGINNER) || level.equals(GameLevel.INTERMEDIATE)) {
+		if(level.equals(GameLevel.BEGINNER)) {
 			return 60;
 		}
-		else {
+		else if(level.equals(GameLevel.INTERMEDIATE)) {
 			return 30;
+		}
+		else {
+			return 15;
 		}
 	}
 	
-	//Programa Principal
-	public static void main(String[] args) {
-		Chronometer chronometer = new Chronometer(GameLevel.ADVANCED);
-		chronometer.setVisible(true);
-	}
-
 	//Getters e Setters-------------------------------------------------------------------------------
 	
 	public int getLevelMinutes() {
@@ -200,11 +176,6 @@ public class Chronometer extends JFrame implements ActionListener {
 	public void setMiliseconds(int miliseconds) {
 		this.miliseconds = miliseconds;
 	}
-
-	public JButton getStartStopButton() {
-		return startStopButton;
-	}
-
 
 	public Timer getTime() {
 		return time;
