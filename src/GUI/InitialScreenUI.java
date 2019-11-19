@@ -72,10 +72,10 @@ public class InitialScreenUI {
 		
 		JRadioButton rdbtnBeginner = new JRadioButton("Beginner");
 		rdbtnBeginner.setBackground(Color.WHITE);
-		rdbtnBeginner.setBounds(340, 500, 144, 23);
+		rdbtnBeginner.setBounds(340, 500, 92, 23);
 		panel.add(rdbtnBeginner);
 		
-		JLabel lblDificulty = new JLabel("Dificulty");
+		JLabel lblDificulty = new JLabel("Difficulty");
 		lblDificulty.setBounds(584, 405, 66, 15);
 		panel.add(lblDificulty);
 		
@@ -137,10 +137,6 @@ public class InitialScreenUI {
 				rdbtnWhiteTeamPlayer1.setSelected(false);
 			}
 		});
-		btnStart.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -191,22 +187,31 @@ public class InitialScreenUI {
 		
 		rdbtnBeginner.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				rdbtnBeginner.setBackground(Color.GREEN);
 				rdbtnIntermediate.setSelected(false);
+				rdbtnIntermediate.setBackground(Color.WHITE);
 				rdbtnAdvanced.setSelected(false);
+				rdbtnAdvanced.setBackground(Color.WHITE);
 			}
 		});
 		
 		rdbtnIntermediate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				rdbtnIntermediate.setBackground(Color.YELLOW);
 				rdbtnBeginner.setSelected(false);
+				rdbtnBeginner.setBackground(Color.WHITE);
 				rdbtnAdvanced.setSelected(false);
+				rdbtnAdvanced.setBackground(Color.WHITE);
 			}
 		});
 		
 		rdbtnAdvanced.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				rdbtnAdvanced.setBackground(Color.RED);
 				rdbtnBeginner.setSelected(false);
+				rdbtnBeginner.setBackground(Color.WHITE);
 				rdbtnIntermediate.setSelected(false);
+				rdbtnIntermediate.setBackground(Color.WHITE);
 			}
 		});
 	}
