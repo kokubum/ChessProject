@@ -395,12 +395,7 @@ public class GameUI extends JFrame implements GameUInterface {
 	public Game getGame() {
 		return this.game;
 	}
-	
-	public static void main(String[] args) {
-		GameUI game = new GameUI("Erick","Alberto",true,false,GameLevel.ADVANCED);
-		game.setVisible(true);
-	
-	}
+
 	
 
 }
