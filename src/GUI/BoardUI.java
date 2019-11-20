@@ -70,18 +70,18 @@ public class BoardUI extends JPanel {
 			for(int j=0;j<8;j++) {
 				if(i%2==0) {
 					if(j%2==0) {
-						this.board[i][j].setBackground(new Color(133,94,66));
+						this.board[i][j].setBackground(new Color(177,152,134));
 					}
 					else {
-						this.board[i][j].setBackground(new Color(177,152,134));
+						this.board[i][j].setBackground(new Color(133,94,66));
 					}
 				}
 				else {
 					if(j%2==0) {
-						this.board[i][j].setBackground(new Color(177,152,134));
+						this.board[i][j].setBackground(new Color(133,94,66));
 					}
 					else {
-						this.board[i][j].setBackground(new Color(133,94,66));
+						this.board[i][j].setBackground(new Color(177,152,134));
 					}
 				}
 			}

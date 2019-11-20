@@ -254,7 +254,6 @@ public class GameUI extends JFrame implements GameUInterface {
 	 * em peças de outra cor, eu precisava diferenciar o null desse acontecimento para o null de quando o jogador não clicar em uma
 	 * peça, pra poder analisar de uma forma em cada casa, e poder sair do for no momento correto
 	 */
-	@Override
 	public boolean isSameColor(Game game,int row,int colum) {
 		if(game.getPlayerTurn().isWhitePlayer()== game.getBoardGame().getBoardMatrix()[row][colum].isWhite()) {
 			return true;
@@ -284,6 +283,7 @@ public class GameUI extends JFrame implements GameUInterface {
 		}
 	}
 	//Método para adicionar um movimento na JTextArea
+	@Override
 	public void writeMovement(Position before,Position after,Piece piece) {
 		String color;
 		if(piece.isWhite() == true) {
@@ -304,17 +304,18 @@ public class GameUI extends JFrame implements GameUInterface {
 	//Método para transformar uma posição da matriz do tabuleiro, em uma posição do xadrez
 	public String realPosition(Position position) {
 		//Para cada coluna associa uma letra (a=0,b=1,c=2...)
-		char colum = (char)(position.getY()+'a');
+		char colum = (char)('h'-position.getY());
 		//Transformo esse char para String
 		String pos = String.valueOf(colum);
 		//Pego a linha correspondente, se for 0 = 8, 1 = 7 ...
 		//Concateno com a string anterior
-		pos = pos.concat(String.valueOf(8-position.getX()));
+		pos = pos.concat(String.valueOf(1+position.getX()));
 		
 		return pos;
 	}
 	
 	//Método para escrever se o rei esta em check
+	@Override
 	public void writeCheck(Piece piece) {
 		String color;
 		if(piece.isWhite() == true) {
