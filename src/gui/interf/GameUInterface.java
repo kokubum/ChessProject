@@ -1,4 +1,4 @@
-package game.interf;
+package gui.interf;
 
 import game.Player;
 import pieces.Piece;

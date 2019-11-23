@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -18,7 +18,7 @@ import javax.swing.Timer;
 import game.Game;
 import game.Player;
 import game.enums.GameLevel;
-import game.interf.GameUInterface;
+import gui.interf.GameUInterface;
 import pieces.PawnP;
 import pieces.Piece;
 import pieces.Position;
