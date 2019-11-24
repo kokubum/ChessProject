@@ -1,10 +1,11 @@
-package GUI;
+package gui;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -61,31 +62,36 @@ public class InitialScreenUI {
 		panel.setLayout(null);
 		
 		JRadioButton rdbtnAdvanced = new JRadioButton("Advanced");
+		rdbtnAdvanced.setFont(new Font("Arial",Font.BOLD,15));
 		rdbtnAdvanced.setBackground(Color.WHITE);
-		rdbtnAdvanced.setBounds(796, 500, 92, 23);
+		rdbtnAdvanced.setBounds(796, 500, 120, 23);
 		panel.add(rdbtnAdvanced);
 		
 		JRadioButton rdbtnIntermediate = new JRadioButton("Intermediate");
+		rdbtnIntermediate.setFont(new Font("Arial",Font.BOLD,15));
 		rdbtnIntermediate.setBackground(Color.WHITE);
-		rdbtnIntermediate.setBounds(558, 500, 144, 23);
+		rdbtnIntermediate.setBounds(558, 500, 150, 23);
 		panel.add(rdbtnIntermediate);
 		
 		JRadioButton rdbtnBeginner = new JRadioButton("Beginner");
+		rdbtnBeginner.setFont(new Font("Arial",Font.BOLD,15));
 		rdbtnBeginner.setBackground(Color.WHITE);
-		rdbtnBeginner.setBounds(340, 500, 92, 23);
+		rdbtnBeginner.setBounds(340, 500, 110, 23);
 		panel.add(rdbtnBeginner);
 		
-		JLabel lblDificulty = new JLabel("Difficulty");
-		lblDificulty.setBounds(584, 405, 66, 15);
+		JLabel lblDificulty = new JLabel("");
+		lblDificulty.setIcon(new ImageIcon(InitialScreenUI.class.getResource("/GUIimages/Dificulty.jpg")));
+		lblDificulty.setBounds(500, 265, 300, 260);
 		panel.add(lblDificulty);
 		
 		JButton btnStart = new JButton("Start");
 		btnStart.setBounds(576, 588, 114, 25);
 		panel.add(btnStart);
 		
-		JRadioButton rdbtnWhiteTeamPlayer2 = new JRadioButton("White team");
+		JRadioButton rdbtnWhiteTeamPlayer2 = new JRadioButton("White Team");
+		rdbtnWhiteTeamPlayer2.setFont(new Font("Arial",Font.BOLD,17));
 		rdbtnWhiteTeamPlayer2.setBackground(Color.WHITE);
-		rdbtnWhiteTeamPlayer2.setBounds(889, 314, 144, 23);
+		rdbtnWhiteTeamPlayer2.setBounds(889, 314, 150, 23);
 		panel.add(rdbtnWhiteTeamPlayer2);
 		
 		textFieldPlayer2 = new JTextField();
@@ -93,8 +99,9 @@ public class InitialScreenUI {
 		panel.add(textFieldPlayer2);
 		textFieldPlayer2.setColumns(10);
 		
-		JLabel lblName_1 = new JLabel("Name:");
-		lblName_1.setBounds(846, 275, 66, 15);
+		JLabel lblName_1 = new JLabel("NAME:");
+		lblName_1.setFont(new Font("Arial",Font.BOLD,15));
+		lblName_1.setBounds(846, 275, 75, 15);
 		panel.add(lblName_1);
 		
 		JLabel lblPlayer_1 = new JLabel("");
@@ -102,9 +109,10 @@ public class InitialScreenUI {
 		lblPlayer_1.setBounds(889, 195, 193, 63);
 		panel.add(lblPlayer_1);
 		
-		JRadioButton rdbtnWhiteTeamPlayer1 = new JRadioButton("White team");
+		JRadioButton rdbtnWhiteTeamPlayer1 = new JRadioButton("White Team");
+		rdbtnWhiteTeamPlayer1.setFont(new Font("Arial",Font.BOLD,17));
 		rdbtnWhiteTeamPlayer1.setBackground(Color.WHITE);
-		rdbtnWhiteTeamPlayer1.setBounds(116, 314, 144, 23);
+		rdbtnWhiteTeamPlayer1.setBounds(116, 314, 150, 23);
 		panel.add(rdbtnWhiteTeamPlayer1);
 		
 		textFieldPlayer1 = new JTextField();
@@ -112,8 +120,9 @@ public class InitialScreenUI {
 		panel.add(textFieldPlayer1);
 		textFieldPlayer1.setColumns(10);
 		
-		JLabel lblName = new JLabel("Name:");
-		lblName.setBounds(84, 275, 66, 15);
+		JLabel lblName = new JLabel("NAME:");
+		lblName.setFont(new Font("Arial",Font.BOLD,15));
+		lblName.setBounds(84, 275, 75, 15);
 		panel.add(lblName);
 		
 		JLabel label = new JLabel("");
