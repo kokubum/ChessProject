@@ -24,10 +24,10 @@ public class BishopP extends Piece {
 	@Override
 	public void createImage() {
 		if(this.isWhite()==true) {
-			this.bishopImage = new ImageIcon("src/PieceImages/BishopPieceWhite.png");
+			this.bishopImage = new ImageIcon(getClass().getClassLoader().getResource("PieceImages/BishopPieceWhite.png"));
 		}
 		else {
-			this.bishopImage = new ImageIcon("src/PieceImages/BishopPieceBlack.png");
+			this.bishopImage = new ImageIcon(getClass().getClassLoader().getResource("PieceImages/BishopPieceBlack.png"));
 		}
 			
 	}
@@ -81,9 +81,5 @@ public class BishopP extends Piece {
 				
 		return moves;
 	}
-
-
-
-
 
 }
