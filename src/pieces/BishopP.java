@@ -24,11 +24,9 @@ public class BishopP extends Piece {
 	@Override
 	public void createImage() {
 		if(this.isWhite()==true) {
-			// Do jeito que esta imagem está sendo pegada não irá funcionar na execução dentro do eclipse mas foi feita para aparecer no .jar
 			this.bishopImage = new ImageIcon(getClass().getClassLoader().getResource("PieceImages/BishopPieceWhite.png"));
 		}
 		else {
-			// Do jeito que esta imagem está sendo pegada não irá funcionar na execução dentro do eclipse mas foi feita para aparecer no .jar
 			this.bishopImage = new ImageIcon(getClass().getClassLoader().getResource("PieceImages/BishopPieceBlack.png"));
 		}
 			

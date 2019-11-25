@@ -25,11 +25,9 @@ public class HorseP extends Piece {
 	@Override
 	public void createImage() {
 		if(this.isWhite()==true) {
-			// Do jeito que esta imagem está sendo pegada não irá funcionar na execução dentro do eclipse mas foi feita para aparecer no .jar
 			this.horseImage = new ImageIcon(getClass().getClassLoader().getResource("PieceImages/HorsePieceWhite.png"));
 		}
 		else {
-			// Do jeito que esta imagem está sendo pegada não irá funcionar na execução dentro do eclipse mas foi feita para aparecer no .jar
 			this.horseImage = new ImageIcon(getClass().getClassLoader().getResource("PieceImages/HorsePieceBlack.png"));
 		}
 			
