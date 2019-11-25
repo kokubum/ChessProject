@@ -30,7 +30,7 @@ public class CheckMateUI extends JFrame {
 	
 	
 	public CheckMateUI(GameUI gameUI) {
-		this.background = new ImageIcon("src/GUIimages/checkMate.jpg");
+		this.background = new ImageIcon(getClass().getClassLoader().getResource("GUIimages/checkMate.jpg"));
 		this.setTitle("CHECKMATE");
 		this.setSize(500, 500);
 		this.setLocationRelativeTo(null);
