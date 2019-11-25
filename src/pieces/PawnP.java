@@ -26,10 +26,12 @@ public class PawnP extends Piece {
 	@Override
 	public void createImage() {
 		if(this.isWhite()==true) {
-			this.pawnImage = new ImageIcon("src/PieceImages/PawnPieceWhite.png");
+			// Do jeito que esta imagem está sendo pegada não irá funcionar na execução dentro do eclipse mas foi feita para aparecer no .jar
+			this.pawnImage = new ImageIcon(getClass().getClassLoader().getResource("PieceImages/PawnPieceWhite.png"));
 		}
 		else {
-			this.pawnImage = new ImageIcon("src/PieceImages/PawnPieceBlack.png");
+			// Do jeito que esta imagem está sendo pegada não irá funcionar na execução dentro do eclipse mas foi feita para aparecer no .jar
+			this.pawnImage = new ImageIcon(getClass().getClassLoader().getResource("PieceImages/PawnPieceBlack.png"));
 		}
 		
 	}

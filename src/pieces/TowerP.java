@@ -24,10 +24,12 @@ public class TowerP extends Piece {
 	@Override
 	public void createImage() {
 		if(this.isWhite()==true) {
-			this.towerImage = new ImageIcon("src/PieceImages/TowerPieceWhite.png");
+			// Do jeito que esta imagem está sendo pegada não irá funcionar na execução dentro do eclipse mas foi feita para aparecer no .jar
+			this.towerImage = new ImageIcon(getClass().getClassLoader().getResource("PieceImages/TowerPieceWhite.png"));
 		}
 		else {
-			this.towerImage = new ImageIcon("src/PieceImages/TowerPieceBlack.png");
+			// Do jeito que esta imagem está sendo pegada não irá funcionar na execução dentro do eclipse mas foi feita para aparecer no .jar
+			this.towerImage = new ImageIcon(getClass().getClassLoader().getResource("PieceImages/TowerPieceBlack.png"));
 		}
 				
 	}

@@ -24,10 +24,12 @@ public class BishopP extends Piece {
 	@Override
 	public void createImage() {
 		if(this.isWhite()==true) {
-			this.bishopImage = new ImageIcon("src/PieceImages/BishopPieceWhite.png");
+			// Do jeito que esta imagem está sendo pegada não irá funcionar na execução dentro do eclipse mas foi feita para aparecer no .jar
+			this.bishopImage = new ImageIcon(getClass().getClassLoader().getResource("PieceImages/BishopPieceWhite.png"));
 		}
 		else {
-			this.bishopImage = new ImageIcon("src/PieceImages/BishopPieceBlack.png");
+			// Do jeito que esta imagem está sendo pegada não irá funcionar na execução dentro do eclipse mas foi feita para aparecer no .jar
+			this.bishopImage = new ImageIcon(getClass().getClassLoader().getResource("PieceImages/BishopPieceBlack.png"));
 		}
 			
 	}
@@ -81,9 +83,5 @@ public class BishopP extends Piece {
 				
 		return moves;
 	}
-
-
-
-
 
 }

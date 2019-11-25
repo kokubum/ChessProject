@@ -24,10 +24,12 @@ public class KingP extends Piece {
 	@Override
 	public void createImage() {
 		if(this.isWhite()==true) {
-			this.kingImage = new ImageIcon("src/PieceImages/KingPieceWhite.png");
+			// Do jeito que esta imagem está sendo pegada não irá funcionar na execução dentro do eclipse mas foi feita para aparecer no .jar
+			this.kingImage = new ImageIcon(getClass().getClassLoader().getResource("PieceImages/KingPieceWhite.png"));
 		}
 		else {
-			this.kingImage = new ImageIcon("src/PieceImages/KingPieceBlack.png");
+			// Do jeito que esta imagem está sendo pegada não irá funcionar na execução dentro do eclipse mas foi feita para aparecer no .jar
+			this.kingImage = new ImageIcon(getClass().getClassLoader().getResource("PieceImages/KingPieceBlack.png"));
 		}
 			
 	}
